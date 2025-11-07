@@ -1,8 +1,16 @@
 # SCUMarketplace
+
+## Setup
+
+1. To install the dependencies, run `npm install`.
+2. To start the application, run `npm run dev`.
+
+
 ## Description ## 
 A website hosting a marketplace for SCU. 
 
 ## Features ##
+Insert features
 
 # React + Vite
 
