@@ -1,0 +1,85 @@
+.backButton {
+  background-color: #A32035;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border: none;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+
+.buyButton {
+  background-color: #A32035;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border: none;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.buyButton:hover {
+  background-color: #862633;
+}
+
+
+
+.content {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;  
+}
+
+.image {
+  flex: 1;
+}
+
+.listingImage {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #EFECE9;
+  object-fit: cover;
+}
+
+.rightSide {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.listingInformation {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #EFECE9;
+}
+
+.location {
+  font-size: 1.1rem;
+  color: hsl(0, 0%, 74%);
+}
+
+.lstingDesc {
+  font-size: 1rem;
+  color: hsl(0, 0%, 74%);
+  margin-bottom: 2rem;
+}
+
+
+
+.email {
+  text-align: right;
+  font-size: 0.9rem;
+  color: #777;
+}
