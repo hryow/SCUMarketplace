@@ -1,5 +1,5 @@
 # SCUMarketplace
-
+SCUMarketplace is a web application hosting a marketplace for Santa Clara University students. Users can browse, buy, and sell items in a secure and convenient online environment.
 ## Setup
 
 1. To install the dependencies, run `npm install`.
