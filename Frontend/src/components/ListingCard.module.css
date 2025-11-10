@@ -1,0 +1,21 @@
+.cardContainer {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 0.5rem;
+}
+
+img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+}
+
+.infoContainer {
+    display: flex;
+    gap: 2rem;
+}
+
+.details {
+    font-size: 0.8rem;
+    margin-right: 0;
+}
