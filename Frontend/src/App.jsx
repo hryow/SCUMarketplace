@@ -3,6 +3,7 @@ import Header from './components/Header.jsx'
 import './App.css'
 import { Route,Routes } from 'react-router-dom'
 import ListingCard from './components/ListingCard.jsx'
+import ListingDetailPage from './components/ListingDetailPage.jsx';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
             <Route path='/Listing' element = {<div>Listing</div>} />
 
+            <Route path='/listing/:id' element={<ListingDetailPage />} />
           </Routes>
         </>
 
