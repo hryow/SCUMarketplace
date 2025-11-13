@@ -15,7 +15,7 @@ export default function ListingDetailPage() {
     
     return (
         <div>
-            <Link to="/Gallery" className = {styles.backButton}>
+            <Link to="/GalleryPage" className = {styles.backButton}>
             &lt; Back
             </Link>
             

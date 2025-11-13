@@ -5,14 +5,30 @@
 }
 
 img {
-    width: 100%;
+    width: 200px;
     aspect-ratio: 1 / 1;
     border-radius: 8px;
 }
 
 .infoContainer {
+    padding: 0 0.2rem;
+}
+
+.title {
+    text-align: left;
+    font-weight: 600;
+    color: #A32035;
+}
+
+.priceDetails {
     display: flex;
     gap: 2rem;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.price {
+    font-weight: 500;
 }
 
 .details {
