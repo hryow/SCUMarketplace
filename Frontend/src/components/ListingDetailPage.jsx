@@ -1,47 +1,97 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './ListingDetailPage.module.css';
-import { Link } from 'react-router-dom';
-
-const amongUsNugget = "/amongNugget.jpg";
+import { Link, useParams } from 'react-router-dom';
 
 
-//Everything is hardcoded currently to get the styling and page looking correct
+
 export default function ListingDetailPage() {
-    function BuyNow(){
-        console.log('Item Bought/Requested');
-        //Backend Connection
-        //
+
+    //id is whatever will be used to differntiate listings
+    const {id} = useParams();
+
+    const [listing,setListing] = useState(null);
+
+    //checking to see if contact button was clicked to show email
+    const [isEmailShown, setEmailShown] = useState(false);
+
+    useEffect(() => {
+        function getListingData(){
+            console.log(`Getting listing data for id: ${id}`);
+
+            fetch(`/api/getlisting/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    setListing(data);
+                })
+                .catch(error => {
+                    console.error("Error getting listing data:", error);
+                });
+        
+ 
+                
+//fake data for testing/styling
+/*
+        const mockData = {
+            title: "Among Us Nugget",
+            price: 67,
+            location: "Swig Hall!",
+            description: "Super rare nugget like an among us imposter from the imposter",
+            email: "sellersemail@scu.edu",
+            imageUrl: "/amongNugget.jpg"  
+        };
+            setListing(mockData);
+*/
+    }
+        getListingData(); },[id]);
+        
+        function ContactClick(){
+        setEmailShown(true);
     };
+
+    if (!listing) {
+        return <div> Loading Listing </div>;
+    }
+
+    let contactSection;
+    if(isEmailShown) {
+        contactSection = (
+            <p className ={styles.email}> {listing.email} </p>
+        );
+    }else {
+        contactSection = (
+            <button onClick={ContactClick} className={styles.buyButton}>
+                Contact!
+            </button>     
+        );
+    }
     
+    
+
     return (
-        <div>
-            <Link to="/GalleryPage" className = {styles.backButton}>
+        <div className={styles.pageContainer}>
+            <Link to="/Gallery" className = {styles.backButton}>
             &lt; Back
             </Link>
             
             <div className={styles.content}>
 
                 <div className={styles.image}>
-                <img src={amongUsNugget} alt = "Among Us Nugget" className={styles.listingImage} />
+                <img src={listing.imageUrl} alt = {listing.title} className={styles.listingImage} />
                 </div>
 
 
                 <div className={styles.rightSide}>
-                    <h1 className={styles.title}> Among Us Nugget </h1>
+                    <h1 className={styles.title}> {listing.title} </h1>
 
                     <div className={styles.listingInformation}>
-                        <span className={styles.price}> $67 </span>
-                        <span className={styles.location}> Swig Hall!</span>
+                        <span className={styles.price}> ${listing.price} </span>
+                        <span className={styles.location}> {listing.location} </span>
                     </div>
                 
-                <p className={styles.lstingDesc}> Super rare nugget like an among us imposter from the imposter </p>
+                <p className={styles.lstingDesc}> {listing.description} </p>
 
-                <button onClick={BuyNow} className={styles.buyButton}>
-                    Buy!!!!
-                </button>
-
-                <p className={styles.email}> sellersemail@scu.edu </p>
-
+                {contactSection}
+                
                 </div>
 
 

@@ -10,7 +10,6 @@ function App() {
   return (
     <div>
         <Header />
-        <GalleryPage />
         {/* <ListingDetailPage /> */}
         <Routes>
           {/* Three below divs are place holders for actual pages */}
