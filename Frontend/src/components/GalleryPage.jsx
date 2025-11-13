@@ -8,6 +8,13 @@ export default function GalleryPage() {
             <ListingCard />
             <ListingCard />
             <ListingCard />
+            <ListingCard />
+            <ListingCard />
+            <ListingCard />
+            <ListingCard />
+            <ListingCard />
+            <ListingCard />
+            <ListingCard />
         </div>
     );
 }

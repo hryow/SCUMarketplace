@@ -1,17 +1,19 @@
 .cardContainer {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    padding: 0.5rem;
+    padding: 0.7rem;
 }
 
 img {
-    width: 200px;
-    aspect-ratio: 1 / 1;
+    width: 20rem;
+    aspect-ratio: 1.2 / 1;
+    object-fit: cover;
     border-radius: 8px;
 }
 
 .infoContainer {
     padding: 0 0.2rem;
+    font-size: 1.5rem;
 }
 
 .title {
@@ -32,6 +34,6 @@ img {
 }
 
 .details {
-    font-size: 0.8rem;
+    font-size: 0.8em;
     margin-right: 0;
 }
