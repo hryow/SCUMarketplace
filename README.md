@@ -3,7 +3,7 @@ SCUMarketplace is a web application hosting a marketplace for Santa Clara Univer
 ## Setup
 
 1. To install the dependencies, run `npm install`.
-2. To start the application, run `npm run dev`.
+2. To start the application, run `npm run dev` in the Frontend folder.
 
 
 ## Description ## 
