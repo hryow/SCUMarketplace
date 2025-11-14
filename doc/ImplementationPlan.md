@@ -1,0 +1,187 @@
+# Implementation Plan (updated as of 11.14.25)
+## Week 6: Design Finalization & Project Setup
+### Goals: 
+ - Finalized our Figma design and confirm full site layout & component structure
+ - Set up GitHub repository and establish branch workflow/set up version control and all development environments for every team member
+ - Began React and Postgres set up
+
+### Tasks for each team member: 
+**Hayoung:** Collaborated closely with Thai on final Figma prototype (interactive version with navigation and component states). Got an understanding of Postgres  
+**Kelvin:** Learned React, got better at Figma, installed Git, learned how to commit and push changes  
+**Thai:** Created and finalized, clickable Figma prototype. Defined the responsive layout and ensured consistent spacing  
+**Alyce:** Familiarized self with Postgres, Created ER diagram and planning database schema with Trisha and crosscheck with the frontend team   
+**Trisha:** Installed and configured PostgreSQL and Node.js locally. Set up express boilerplate structure. Working with Alyce on schema documentation  
+
+
+## Week 7: Core Feature Development (frontend & backend)
+### Goals: 
+- Implemented core UI components and linked them to backend routes
+- Established and tested foundational database models
+- Began defining and testing API endpoints  
+
+### Tasks for each team member: 
+**Hayoung:** Oversaw weekly progress and ensured coordination between frontend and backend, assisted Kelvin and Thai with structure and layout, participated in initial integration with team by verifying front-end and backend connectivity, talked to Trisha about DB  
+**Kelvin:** Developing basic UI components (navigation, liking pages, buttons), integrating components with placeholder using backend routes, collaborating with Thai to ensure responsive layout and on feature layout  
+**Thai:** Continuing detailed UI work with Kelvin and focused on page routing and UI consistency, implemented the React Router and page transitions, worked with Alyce to ensure UI fields match the backend data models, collaborated with Kelvin on feature layout  
+**Alyce:** Created initial database schema with Trisha in PostgreSQL (users, items, etc.), design and document the API route specifications for frontend team, starting to implement simple backend routes (GET, POST) with Trisha, cross-check API routes with frontend team and start to assist Trisha with backend/database implementation   
+**Trisha:** Led the backend setup in Node.js/Express, building API endpoints for user registration/login and data retrieval, testing database connectivity and verify query accuracy, coordinating backend data format with Alyce for frontend compatibility  
+
+## [CURRENT WEEK] Week 8: Core Feature Development (frontend & backend) 
+### Goals:
+- Complete development of core features to reach MVP state  
+- Implement user authentication and begin frontend-backend integration testing  
+- Update bugs in shared document  
+### Tasks for each team member: 
+**Hayoung:** 
+- Oversee further integration process between frontend and backend
+- Check up on other members to help out
+- Focus on integration testing and bug tracking
+- Coordinate bug reporting in shared document
+
+**Kelvin:**
+- Finalize all UI for MVP (photo upload, layout adjustments)
+- Add responsive photo upload form (with image preview)
+- Finish anything not done from week 7 and finish up the UI to get it to the MVP state
+- Report bugs
+
+**Thai:**
+- Complete UI interactivity with Kelvin
+- Check on other members to see if there’s anything I can help with
+- Report bugs
+
+**Alyce:**
+- Integrate API routes with frontend requests 
+- Continue backend testing and help link frontend components to backend data
+- Assist Trisha on debugging backend errors using Postman
+- Assist Trisha with testing on user authentication logic / finalization
+
+**Trisha:**
+- Finalizing the user authentication logic (session / token-based) - JWT most likely (not finalized yet, will finalize this week)
+- Secure API endpoints
+- Testing the database queries for components  (i.e. user login or item creation, etc)
+- Finalize and test authentication logic and  ensure stable database interaction, ensure successful data flow between React and PostgreSQL
+
+
+## Week 9: Integration & Testing
+Project Manager: Kelvin Rout
+### Goals:
+- Conduct end-to-end integration testing for both frontend and backend
+- Conduct usability testing and fix issues identified during MVP review
+- Ensure all components are complete and met
+- Polishing user experience
+- Implementing any additional features (non-MVP) features if time permits
+- Start creating and updating  documentation (UML diagrams, ER diagram, technology plan)
+
+### Tasks for each team member: 
+**Hayoung:** 
+- Continue to ensure that frontend and backend components are working and that integration is going smoothly
+- Check in with team members if issues in either frontend or backend arise
+- Coordinate testing sessions, maintain bug-tracking document
+- Check-in with rest of team in case bugs arise → need to update document 
+- Update documentation as needed
+- Add documentation onto Github
+  
+**Kelvin:**
+- Make UI look good, try to add some non MVP features if time allows
+- Make sure formatting and data are correctly presented on the front end and ensure all data displays correctly
+- Collaborate/check-in with Thai
+- Update documentation as needed
+
+**Thai:**
+- Fix all UI issues
+- Check bug-tracking document for any outstanding issues
+- If no issues, add non-MVP features
+- Attempt to connect everything together
+- Assist in debugging and minor UI improvements
+- Collaborate/check-in  with Kelvin
+- Update documentation as needed
+- If other members need help, help other teammates
+
+**Alyce:**
+- Continue to test operations and report any issues to respective teams
+- Make sure the API routes and responses are going to the correct places
+- Finalize any last minute implementation, ensure smooth data flow
+- Maintain API endpoint documentation
+- Update documentation as needed
+- Update progress
+
+**Trisha:**
+- Ensuring data consistency across the database as well as API response Implementing features (i.e. search filters, and more)
+- Optimize the backend performance, and ensure secure data handling
+- Check-in with frontend team
+- Maintain API endpoint documentation
+- Update documentation as needed 
+- Update progress
+
+
+## Thanksgiving Week: Break
+### Goals:
+- Finish up unfinished tasks from previous week 
+- Get a head start on tasks for the upcoming week 
+
+
+## Week 10: Final presentation prep
+### Goals:
+- Complete final testing and documentation (ensure each member has tested and can see it in action)
+- Preparing for the class presentation/demo
+- Figure out # of slides
+- Who does what
+- Content for both backend and frontend 
+- When to practice
+- Who says what
+- Deploying locally first, then through a host (if feasible)
+
+
+### Tasks for each team member: 
+**Hayoung:**
+- Write fullstack documentation with Alyce
+- Assist other team members with other documentation
+- Prepare demo and presentation materials
+- Make slides, choose layout, and work on frontend slides
+- Check in with each team member to ensure we have everything working
+
+**Kelvin:**
+- Make sure the front end actually works
+- Prepare for presentation making materials and practicing
+- Work on slide content (React and other frontend)
+- Check in with each team member to ensure we have everything working
+
+**Thai:**
+- Polish UI 
+- Prep for presentation
+- Check-in with each team member to ensure we have everything working
+- Work with frontend team for what to add for slide content (how we will present, talking points, etc)
+
+**Alyce:**
+- Write fullstack documentation
+- Assist Trisha with DB and the frontend team with their documentation
+- Prepare demo and presentation materials (checkin: # of slides, content, demo, how long each component should be)
+- Checkin with each team member to ensure we have everything working
+
+**Trisha:**
+- Finalize backend documentation once more and ensure database queries are fully optimized
+- Work with team to add slide content (specifically for DB)
+- Checkin with each team member to ensure we have everything working
+- Prepare a demo/ help team with presentation
+- Coordinate practice sessions and timing for each speaker
+
+
+## Time conflicts:
+**Hayoung:**
+- Nov 4-7: GHC
+- Nov 20: Midterm
+- Nov 24-28: Thanksgiving break (out of town)
+  
+**Kelvin:**
+- Nov 20: Big thing
+- Nov 24-28: Thanksgiving week
+- Oct 31- Nov 2: Can’t
+  
+**Trisha:**
+
+**Thai:**
+- week 7: 💀
+  
+**Alyce:**
+- Nov 24 - 28: Thanksgiving break (Out of town)
+  
