@@ -32,7 +32,7 @@ If you are developing a production application, we recommend using TypeScript wi
 ## Documentation
 Project documentation is organized in the [`/doc`](/doc) folder:
 
-- [UML Diagram](./doc/UMLDiagram) - Class diagram
-- [ER Diagram](./doc/ERDiagram) - Database schema and relationships
+- [UML Diagram](./doc/UMLDiagram.PNG) - Class diagram
+- [ER Diagram](./doc/ERDiagram.PNG) - Database schema and relationships
 - [Technology Plan](./doc/TechnologyPlan.md) - Tech stack and architecture decisions
 - [Implementation Plan](./doc/ImplementationPlan.md) - Project timeline and milestones
