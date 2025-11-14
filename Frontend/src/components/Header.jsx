@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from './Header.module.css';
 
+/* TODO: make button pressable (goes down on click)
+         make "User" depend on name
+         make pfp depend on pfp */
+
 export default function Header(){
     return(
         <div className={styles.container}>

@@ -3,6 +3,10 @@ import styles from './ListingCard.module.css';
 
 const amongUsNugget = "/amongNugget.jpg";
 
+
+/* TODO: make title, price, be passed on thru props
+         make more details go to listing*/
+
 export default function ListingCard() {
     return (
         <div className={styles.cardContainer}>
