@@ -4,6 +4,39 @@ const { db } = require('pg');
 const app = express();
 const port = 8000;
 
+// FOR TESTING PURPOSES ONLY
+// REMOVE LATER
+let id = 4;
+const mockListingsData = [
+    {
+        id: '1',
+        title: 'Ugly Labubu',
+        price: '67.99',
+        description: 'Good condition, comes with original box.',
+        photo: 'https://placehold.co/400x300/F0F8FF/333?text=Labubu+Photo+1',
+        location: 'Swig',
+        email: 'peepeepoopoo@scu.edu'
+    },
+    {
+        id: '2',
+        title: 'Rare Vinyl Record (Taylor Swift)',
+        price: '350.00',
+        description: 'Limited edition pressing, still sealed. A collector\'s item!',
+        photo: 'https://placehold.co/400x300/FFD700/000?text=Vinyl+Record',
+        location: 'University Villas',
+        email: 'sixsevennn@scu.edu'
+    },
+    {
+        id: '3',
+        title: 'Barely Used Blender',
+        price: '25.00',
+        description: 'Perfect for smoothies! Selling because I upgraded.',
+        photo: 'https://placehold.co/400x300/ADD8E6/000?text=Blender+Image',
+        location: 'Finn',
+        email: 'gymrat234@scu.edu'
+    }
+];
+
 // Establish connection with database pool 
 
 // Middleware for parsing JSON
@@ -21,11 +54,12 @@ app.post('/api/createuser', (req, res) =>{
     // keeping all fields required for now
     const { email, name, pfp, bio} = req.body;
     if(!email || !name|| !pfp || !bio){
-        console.log('email, name, profile picture, or biography is missing');
+        console.log('[API] email, name, profile picture, or biography is missing');
         return res.status(400).json({
             error: 'email, name, profile picture, or biography is missing'
         });
     }
+    // add all of the fields to the db
 });
 
 // POST - Create new Listing
@@ -39,28 +73,52 @@ app.post('/api/createuser', (req, res) =>{
         location: Swig
 */
 app.post('/api/createlisting', (req, res) => {
-    const { title, price, description, photo, location } = req.body;
-    if(!title || !price || !description || !photo || !location){
-        console.log('Title, price, description, photo, or location is missing');
+    const { title, price, description, photo, location, email } = req.body;
+    if(!title || !price || !description || !photo || !location || !email){
+        console.log('[API] Title, price, description, photo, location, or email is missing');
         return res.status(400).json({
-            error: 'Title, price, description, photo, or location is missing'
+            error: 'Title, price, description, photo, location, or email is missing'
         });
     }
     // something something to generate a lid
     // add new listing to the db
     // return a response (on success and for any errors);
+
+    //MOCK DB TEST
+    const newId = id;
+    id++;
+    const newListing = {
+        id: newId,
+        title: title,
+        price: price,
+        photo: photo,
+        location: location,
+        email: email
+    };
+    mockListingsData.push(newListing);
+    console.log(`[API] Successfully created new listing: ${newListing.title}`);
+     res.status(201).json({
+        message: 'Listing created successfully',
+    });
 })
 
 // GET/FETCH - Retrieve listing data
 app.get('/api/getlistings', (req, res) => {
+    // get all listing data from db
+    // loop to parse everything into an array
 
+    // TEST FROM MOCK DB
+    const listings = mockListingsData;
+    console.log(`[API] Serving ${listings.length} listings.`);
+    res.status(200).json(listings);
 });
 
 // DELETE - Delete specific listing
 // Implement if needed. Otherwise disregard.
 // Since professor is wondering what happens when a listing is sold
 app.delete('api/listings/:id', (req, res) => {
-
+    const id = req.params.id;
+    // delete listing with the matching id in the db (if applicable)
 });
 
 app.listen(port, () => {
