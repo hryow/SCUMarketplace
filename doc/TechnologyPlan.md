@@ -1,3 +1,4 @@
+# Technology Plan (updated as of 11.14.25)
 ## What is our project? 
 For our project, an SCU Marketplace, we will develop a web application to ensure accessibility
 and ease of use across various devices. Our group chose a web platform because it allows both
