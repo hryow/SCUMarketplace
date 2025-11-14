@@ -1,9 +1,12 @@
+## What is our project? 
 For our project, an SCU Marketplace, we will develop a web application to ensure accessibility
 and ease of use across various devices. Our group chose a web platform because it allows both
 students and faculty to access the marketplace from any web browser without needing to
 download a separate application. In addition, web applications provide an efficient method for
 both development and deployment compared to a native mobile application or any desktop
 application, which also aligns well with our team’s current skill set.
+
+## Front-end
 We aim to build the frontend of our Marketplace project using HTML, CSS, and JavaScript,
 while leveraging the React framework. Our group selected React for its modularity, helping us
 manage clean code that can be reused. In addition, our application will include dynamic content
@@ -13,10 +16,13 @@ and are learning React, making them well-suited to lead the development and impl
 these areas. Hayoung will contribute to both front-end design and development as well by
 collaborating with Thai to create a Figma mockup that will serve as a visual reference and
 design for the overall team.
+
 While Thai and Kelvin are both comfortable with JavaScript, Kelvin plans to deepen his skills in
 React through The Odin Project, an open-source platform that provides structured lessons on
 web development. By doing so, he can contribute to all implementations where React is
 necessary.
+
+## Back-end
 As for the back-end development, our team has chosen PostgreSQL as the database for our
 Marketplace project. PostgreSQL is both a powerful and reliable relational database that offers
 strong scalability, allows for complex queries, is SQL and ACID compliant, and provides
@@ -24,6 +30,7 @@ excellent integration with potential future cloud services, such as Google Cloud
 team has decided to start development locally for our Marketplace project without cloud hosting
 to minimize costs. Through this approach, we will build and test core features that are crucial
 before scaling to cloud environments in the future.
+
 Trisha, who has experience with databases, will lead the back-end development, specifically
 regarding Postgres. She will be working with Alyce, who also has an understanding of database
 management. Together, Alyce and Trisha will focus on designing data models, ensuring proper
@@ -31,10 +38,14 @@ data relationships, as well as developing the backend logic for various componen
 transactions, listings for products, and user authentication. Alyce will also serve as a full-stack
 developer, bridging both the front-end and back-end to ensure consistent data flow and
 integration between the UI and database.
+
+## Additional delegations 
 Furthermore, Hayoung will serve as a secondary full-stack developer, helping on both the
 front-end and back-end aspects of the Marketplace project. This kind of cross-collaboration will
 ensure that every part of our project has at least two people contributing, which allows for
 flexibility and shared knowledge across the team.
+
+## Conclusion
 Ultimately, our choices for technologies reflect a connection between leveraging the team's
 existing strengths as well as facilitating skill growth. Both React and PostgreSQL offer
 scalability, while other resources our team will be using, such as The Odin Project and Figma,
