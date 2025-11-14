@@ -1,0 +1,94 @@
+.pageContainer {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  text-align: left;
+}
+
+.backButton {
+  background-color: #A32035;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border: none;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+
+
+.submitButton {
+  background-color: #A32035;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.submitButton:hover {
+  background-color: #862633;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.imageUploader {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #EFECE9;
+  border-radius: 8px;
+  min-height: 400px;
+  color: #888;
+  background-color: #f9f9f9;
+}
+
+.plusSign {
+  font-size: 4rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.formInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.input,
+.textArea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+}
+
+.priceAndLocation {
+  display: flex;
+  gap: 1rem;
+}
+.price {
+  flex: 1;
+}
+.location {
+  flex: 2;  
+}
+
+.textArea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+
