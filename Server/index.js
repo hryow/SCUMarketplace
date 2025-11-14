@@ -12,7 +12,7 @@ const mockListingsData = [
         id: '1',
         title: 'Ugly Labubu',
         price: '67.99',
-        description: 'Good condition, comes with original box.',
+        description: 'Good condition. Box not included.',
         photo: 'https://placehold.co/400x300/F0F8FF/333?text=Labubu+Photo+1',
         location: 'Swig',
         email: 'peepeepoopoo@scu.edu'
