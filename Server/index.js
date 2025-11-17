@@ -118,7 +118,29 @@ app.get('/api/getlistings', (req, res) => {
 // Since professor is wondering what happens when a listing is sold
 app.delete('api/listings/:id', (req, res) => {
     const id = req.params.id;
+    if(!id){
+        console.log('[API] Missing id');
+        return res.status(400).json({
+            error: 'Missing id'
+        });
+    }
     // delete listing with the matching id in the db (if applicable)
+
+    // TEST FROM MOCK DB
+    const foundListing = mockListingsData.find(mockListingsData => mockListingsData.id === id);
+    if(!foundListing){
+        console.log('[API] Listing not found/does not exist');
+        return res.status(400).json({
+            error: 'Listing does not exist'
+        });
+    }
+    console.log(foundListing); // prints listing to delete's data 
+    const listingIdx = mockListingsData.indexOf(mockListingsData => mockListingsData.id === id);
+    mockListingsData.splice(listingIdx, 1);
+    console.log(mockListingsData);
+    return res.status(201).json({
+        message: 'Listing deleted successfully'
+    });
 });
 
 app.listen(port, () => {
