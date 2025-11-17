@@ -127,6 +127,7 @@ app.delete('api/listings/:id', (req, res) => {
     // delete listing with the matching id in the db (if applicable)
 
     // TEST FROM MOCK DB
+    // check if the listing exists in db
     const foundListing = mockListingsData.find(mockListingsData => mockListingsData.id === id);
     if(!foundListing){
         console.log('[API] Listing not found/does not exist');
@@ -137,7 +138,7 @@ app.delete('api/listings/:id', (req, res) => {
     console.log(foundListing); // prints listing to delete's data 
     const listingIdx = mockListingsData.indexOf(mockListingsData => mockListingsData.id === id);
     mockListingsData.splice(listingIdx, 1);
-    console.log(mockListingsData);
+    console.log(mockListingsData); // show changes
     return res.status(201).json({
         message: 'Listing deleted successfully'
     });
