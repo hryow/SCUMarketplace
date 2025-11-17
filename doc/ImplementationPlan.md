@@ -26,43 +26,24 @@
 **Alyce:** Created initial database schema with Trisha in PostgreSQL (users, items, etc.), design and document the API route specifications for frontend team, starting to implement simple backend routes (GET, POST) with Trisha, cross-check API routes with frontend team and start to assist Trisha with backend/database implementation   
 **Trisha:** Led the backend setup in Node.js/Express, building API endpoints for user registration/login and data retrieval, testing database connectivity and verify query accuracy, coordinating backend data format with Alyce for frontend compatibility  
 
-## [CURRENT WEEK] Week 8: Core Feature Development (frontend & backend) 
+## Week 8: Core Feature Development (frontend & backend) 
 ### Goals:
 - Complete development of core features to reach MVP state  
 - Implement user authentication and begin frontend-backend integration testing  
 - Update bugs in shared document  
 ### Tasks for each team member: 
-**Hayoung:** 
-- Oversee further integration process between frontend and backend
-- Check up on other members to help out
-- Focus on integration testing and bug tracking
-- Coordinate bug reporting in shared document
+**Hayoung:** Oversee further integration process between frontend and backend, check up on other members to help out, focus on integration testing and bug tracking, and coordinate bug reporting in shared document
 
-**Kelvin:**
-- Finalize all UI for MVP (photo upload, layout adjustments)
-- Add responsive photo upload form (with image preview)
-- Finish anything not done from week 7 and finish up the UI to get it to the MVP state
-- Report bugs
+**Kelvin:** Finalize all UI for MVP (photo upload, layout adjustments), add responsive photo upload form (with image preview), finish anything not done from week 7 and finish up the UI to get it to the MVP state, and report bugs
 
-**Thai:**
-- Complete UI interactivity with Kelvin
-- Check on other members to see if there’s anything I can help with
-- Report bugs
+**Thai:** Complete UI interactivity with Kelvin, check on other members to see if there’s anything I can help with, and report bugs
 
-**Alyce:**
-- Integrate API routes with frontend requests 
-- Continue backend testing and help link frontend components to backend data
-- Assist Trisha on debugging backend errors using Postman
-- Assist Trisha with testing on user authentication logic / finalization
+**Alyce:** Integrate API routes with frontend requests, continue backend testing and help link frontend components to backend data, assist Trisha on debugging backend errors using Postman, and assist Trisha with testing on user authentication logic / finalization
 
-**Trisha:**
-- Finalizing the user authentication logic (session / token-based) - JWT most likely (not finalized yet, will finalize this week)
-- Secure API endpoints
-- Testing the database queries for components  (i.e. user login or item creation, etc)
-- Finalize and test authentication logic and  ensure stable database interaction, ensure successful data flow between React and PostgreSQL
+**Trisha:** Finalizing the user authentication logic (session / token-based) - JWT most likely (not finalized yet, will finalize this week), secure API endpoints, testing the database queries for components  (i.e. user login or item creation, etc), and finalize and test authentication logic and  ensure stable database interaction, ensure successful data flow between React and PostgreSQL
 
 
-## Week 9: Integration & Testing
+## [CURRENT WEEK] Week 9: Integration & Testing
 Project Manager: Kelvin Rout
 ### Goals:
 - Conduct end-to-end integration testing for both frontend and backend
@@ -135,13 +116,13 @@ Project Manager: Kelvin Rout
 ### Tasks for each team member: 
 **Hayoung:**
 - Write fullstack documentation with Alyce
-- Assist other team members with other documentation
+- Assist other team members with other documentation (back-end, front-end)
 - Prepare demo and presentation materials
 - Make slides, choose layout, and work on frontend slides
 - Check in with each team member to ensure we have everything working
 
 **Kelvin:**
-- Make sure the front end actually works
+- Confirm that front-end is working as expected
 - Prepare for presentation making materials and practicing
 - Work on slide content (React and other frontend)
 - Check in with each team member to ensure we have everything working
@@ -153,7 +134,7 @@ Project Manager: Kelvin Rout
 - Work with frontend team for what to add for slide content (how we will present, talking points, etc)
 
 **Alyce:**
-- Write fullstack documentation
+- Write fullstack documentation with Hayoung
 - Assist Trisha with DB and the frontend team with their documentation
 - Prepare demo and presentation materials (checkin: # of slides, content, demo, how long each component should be)
 - Checkin with each team member to ensure we have everything working
