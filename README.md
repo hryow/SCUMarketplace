@@ -36,3 +36,4 @@ Project documentation is organized in the [`/doc`](/doc) folder:
 - [ER Diagram](./doc/ERDiagram.PNG) - Database schema and relationships
 - [Technology Plan](./doc/TechnologyPlan.md) - Tech stack and architecture decisions
 - [Implementation Plan](./doc/ImplementationPlan.md) - Project timeline and milestones
+- [System Requirements] (./doc/SystemRequirements.pdf) - System requirements
