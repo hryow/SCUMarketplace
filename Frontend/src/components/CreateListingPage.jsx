@@ -13,7 +13,7 @@ const [imagePreview, setImagePreview] = useState(null);
 
 const[isSubmitted, setSubmitted] = useState(false);
 
-function submitListing(event){
+async function submitListing(event){
     event.preventDefault();
     console.log(`Adding listing to server`)
 

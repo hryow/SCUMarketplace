@@ -109,7 +109,7 @@ app.post('/api/createuser', (req, res) =>{
 });
 
 // POST - Check if user credentials are valid
-app.post('/api/checkuser', (req, res) => {
+app.get('/api/validuser', (req, res) => {
     const {email, password} = req.body;
     if(!email || !password){
         console.log('[API] email or password is missing');
@@ -130,6 +130,10 @@ app.post('/api/checkuser', (req, res) => {
     // If frontend team needs a specific token to be 
     res.status(201).json({
         message: 'User found successfully',
+        email: validUser.email,
+        name: validUser.name,
+        pfp: validUser.pfp,
+        bio: validUser.bio
     });
 });
 
