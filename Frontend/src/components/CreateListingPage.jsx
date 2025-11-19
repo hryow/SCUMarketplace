@@ -16,16 +16,33 @@ const[isSubmitted, setSubmitted] = useState(false);
 async function submitListing(event){
     event.preventDefault();
     console.log(`Adding listing to server`)
-
     console.log(listingName, price, location, description,imageFile);    
 
+    const listingData = {
+        title: listingName,
+        price: price,
+        description: description,
+        photo: imageFile,
+        location: location,
+        email: 'peepeepoopoo@scu.edu' // dummy email for testing
+    };
     
-    const formData = new FormData();
-    formData.append('listingName',listingName);
-    formData.append('price',price);
-    formData.append('location',location);
-    formData.append('description',description);
-    formData.append('image',imageFile);
+    try {
+        const response = await fetch('/api/createlisting', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(listingData) 
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error. status: ${response.status}`);
+        }
+        const res = await response.json();
+        console.log('Success:', res);
+    } catch (error) {
+        console.error('Error submitting listing:', error);
+    }
 
     //clear form after submission
     setListingName('');
