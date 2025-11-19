@@ -1,4 +1,4 @@
-# Implementation Plan (updated as of 11.14.25)
+# Implementation Plan (updated as of 11.19.25)
 ## Week 6: Design Finalization & Project Setup
 ### Goals: 
  - Finalized our Figma design and confirm full site layout & component structure
@@ -58,6 +58,7 @@ Project Manager: Kelvin Rout
 - Continue to ensure that frontend and backend components are working and that integration is going smoothly
 - Check in with team members if issues in either frontend or backend arise
 - Coordinate testing sessions, maintain bug-tracking document
+- Start creating automated tests and checks to see if everything is working as expected 
 - Check-in with rest of team in case bugs arise → need to update document 
 - Update documentation as needed
 - Add documentation onto Github
@@ -120,6 +121,7 @@ Project Manager: Kelvin Rout
 - Prepare demo and presentation materials
 - Make slides, choose layout, and work on frontend slides
 - Check in with each team member to ensure we have everything working
+- Continue testing
 
 **Kelvin:**
 - Confirm that front-end is working as expected
