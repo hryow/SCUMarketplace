@@ -8,14 +8,59 @@ const [listingName, setListingName] = useState('');
 const [price, setPrice] = useState('');
 const [location, setLocation] = useState('');
 const [description, setDescription] = useState('');
-//images need to be added still
+const [imageFile, setImage] = useState(null);
+const [imagePreview, setImagePreview] = useState(null);
+
+const[isSubmitted, setSubmitted] = useState(false);
 
 function submitListing(event){
     event.preventDefault();
     console.log(`Adding listing to server`)
 
-    console.log(listingName, price, location, description);    
-    //send to server or something here
+    console.log(listingName, price, location, description,imageFile);    
+
+    
+    const formData = new FormData();
+    formData.append('listingName',listingName);
+    formData.append('price',price);
+    formData.append('location',location);
+    formData.append('description',description);
+    formData.append('image',imageFile);
+
+    //clear form after submission
+    setListingName('');
+    setPrice('');
+    setLocation('');
+    setDescription('');
+    setImage(null);
+    setImagePreview(null);
+
+    setSubmitted(true);
+
+    setTimeout(() => setSubmitted(false), 3000);
+}
+
+function handleImageUpload(event) {
+    const file = event.target.files[0];
+    if (file){
+        setImage(file);
+        setImagePreview(URL.createObjectURL(file));
+    }
+}
+
+let imageContent;
+if (imagePreview) {
+    imageContent = (
+    <img src={imagePreview} alt='Listing Preview' className={styles.imagePreview} />
+    );
+} 
+else{
+    imageContent = (
+        <>
+            <div className = {styles.plusSign}> + </div>
+            <div> Add Image </div>
+        </>
+    );
 }
 
 return (
@@ -24,13 +69,14 @@ return (
         &lt; Back
         </Link>                
             
-            <form className={styles.form} onSubmit={submitListing}>
-                <div className={styles.imageUploader}>
-                    <div className={styles.plusSign}> + </div>
-                    <div> Add Image </div>
-                    {/*Will add image stuff here later */}
-                </div>
 
+            <form className={styles.form} onSubmit={submitListing}>
+                <label className={styles.imageUploader}>
+                     <input type="file" accept='image/*' className={styles.fileinput}
+                     onChange={handleImageUpload} />
+            
+                {imageContent}
+                </label>
                 <div className={styles.formInfo}>
                 <label>Listing Name *
                     <input type="text" className={styles.input} value={listingName} 
@@ -55,8 +101,11 @@ return (
 
                 <button type="submit" className={styles.submitButton}> 
                 Submit Listing
-                
                 </button>
+                {isSubmitted && (
+                    <p style={{color: 'green', marginTop: '10px'}}>
+                        Successfully Submitted!</p>
+                )}
                 </div>
             </form>
         </div>

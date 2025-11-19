@@ -50,12 +50,30 @@
   min-height: 400px;
   color: #888;
   background-color: #f9f9f9;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+.imageUploader:hover {
+  background-color: #f4f4f4;
+  border-color: #aaa;
 }
 
 .plusSign {
   font-size: 4rem;
   font-weight: 200;
   line-height: 1;
+}
+
+.fileinput {
+  display: none;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
 }
 
 .formInfo {
