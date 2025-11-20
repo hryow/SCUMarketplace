@@ -2,33 +2,6 @@ import React, {useState, useEffect} from 'react';
 import styles from './ListingDetailPage.module.css';
 import { Link, useParams } from 'react-router-dom';
 
-
-
-export default function ListingDetailPage() {
-
-    //id is whatever will be used to differntiate listings
-    const {id} = useParams();
-
-    const [listing,setListing] = useState(null);
-
-    //checking to see if contact button was clicked to show email
-    const [isEmailShown, setEmailShown] = useState(false);
-
-    useEffect(() => {
-        function getListingData(){
-            console.log(`Getting listing data for id: ${id}`);
-
-            fetch(`/api/getlisting/${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    setListing(data);
-                })
-                .catch(error => {
-                    console.error("Error getting listing data:", error);
-                });
-        
- 
-                
 //fake data for testing/styling
 /*
         const mockData = {
@@ -41,31 +14,39 @@ export default function ListingDetailPage() {
         };
             setListing(mockData);
 */
-    }
-        getListingData(); },[id]);
-        
-        function ContactClick(){
+
+export default function ListingDetailPage() {
+    //id is whatever will be used to differntiate listings
+    const { id } = useParams();
+
+    // get listing data from ListingCard
+    const location = useLocation();
+    const data = location.state?.listing;
+    const [listing, setListing] = useState(data || null);
+
+    //checking to see if contact button was clicked to show email
+    const [isEmailShown, setEmailShown] = useState(false);
+
+    function ContactClick() {
         setEmailShown(true);
     };
 
     if (!listing) {
-        return <div> Loading Listing </div>;
+        return <div> Loading Listing... </div>;
     }
 
     let contactSection;
-    if(isEmailShown) {
+    if (isEmailShown) {
         contactSection = (
-            <p className ={styles.email}> {listing.email} </p>
+            <p className={styles.email}> {listing.email} </p>
         );
-    }else {
+    } else {
         contactSection = (
             <button onClick={ContactClick} className={styles.buyButton}>
                 Contact!
-            </button>     
+            </button>
         );
     }
-    
-    
 
     return (
         <div className={styles.pageContainer}>
