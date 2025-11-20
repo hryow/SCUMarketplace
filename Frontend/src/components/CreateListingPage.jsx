@@ -5,7 +5,7 @@ import {Link, useParams} from 'react-router-dom';
 
 import Header from './Header.jsx'
 
-export default function CreateListingPage() {
+export default function CreateListingPage({ userEmail }) {
 const [listingName, setListingName] = useState('');
 const [price, setPrice] = useState('');
 const [location, setLocation] = useState('');
@@ -84,7 +84,7 @@ else{
 
 return (
         <>
-            <Header />
+            <Header userEmail={userEmail} />
             <div className={styles.pageContainer}> 
             <Link to="/Gallery" className={styles.backButton}>
             &lt; Back
@@ -121,8 +121,9 @@ return (
                     </label>
 
                     <button type="submit" className={styles.submitButton}> 
-                    Submit Listing
+                        Submit Listing
                     </button>
+                    <div>{userEmail}</div>
                     {isSubmitted && (
                         <p style={{color: 'green', marginTop: '10px'}}>
                             Successfully Submitted!</p>

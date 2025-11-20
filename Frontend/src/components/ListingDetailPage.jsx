@@ -85,7 +85,7 @@ export default function ListingDetailPage({userEmail}) {
 
     return (
         <>
-            <Header />
+            <Header userEmail={userEmail}/>
             <div className={styles.pageContainer}>
                 <Link to="/Gallery" className = {styles.backButton}>
                 &lt; Back

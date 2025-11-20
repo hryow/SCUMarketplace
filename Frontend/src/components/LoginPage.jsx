@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './LoginPage.module.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function LoginPage() {
+export default function LoginPage({ setUserEmail }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hasAccount, setHasAccount] = useState(true);
@@ -27,6 +27,8 @@ export default function LoginPage() {
         } else {
             // Sign up backend
         }
+        console.log("Email: " + email);
+        setUserEmail(email);
         navigate('/Gallery');
     }
 

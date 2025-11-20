@@ -48,6 +48,10 @@
     color: #FF4D72;
 }
 
+.link:hover {
+    filter: brightness(0.8);
+}
+
 button {
     margin: 4rem 0;
     background-color: #A32035;

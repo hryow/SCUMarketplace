@@ -7,11 +7,11 @@ import styles from './Header.module.css';
          make pfp depend on pfp 
          make add new listing button go to create listing page*/
 
-export default function Header(){
+export default function Header({ userEmail }){
     return(
         <div className={styles.container}>
             <div className={styles.profile}></div>
-            <div className={styles.welcome}>Welcome, User! </div>
+            <div className={styles.welcome}>Welcome, {userEmail}!</div>
             <Link to="/listing" className={styles.addListingButton}>
                 <div className={styles.plus}>+</div>
                 <div>sell something</div>
