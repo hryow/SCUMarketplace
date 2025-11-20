@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styles from './ListingDetailPage.module.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 
 //fake data for testing/styling
 /*
@@ -15,7 +15,7 @@ import { Link, useParams } from 'react-router-dom';
             setListing(mockData);
 */
 
-export default function ListingDetailPage() {
+export default function ListingDetailPage({userEmail}) {
     //id is whatever will be used to differntiate listings
     const { id } = useParams();
 
@@ -28,24 +28,40 @@ export default function ListingDetailPage() {
     const [isEmailShown, setEmailShown] = useState(false);
 
     function ContactClick() {
+        window.location.href = `mailto:${listing.email}?subject=Interested in ${listing.title}`;
         setEmailShown(true);
     };
+
+    function handleDeleteClick(){
+        if(window.confirm("Are you sure you want to delete this listing?")) {
+            console.log(`Deleting listing ${id}...`);
+            //LOGIC TO ACTUALLY DELETE LISTING FETCH
+        }
+    }
 
     if (!listing) {
         return <div> Loading Listing... </div>;
     }
 
+    const isOwner = userEmail === listing.email;
+
     let contactSection;
-    if (isEmailShown) {
+    if (isOwner){
         contactSection = (
-            <p className={styles.email}> {listing.email} </p>
-        );
-    } else {
-        contactSection = (
-            <button onClick={ContactClick} className={styles.buyButton}>
-                Contact!
+            <button onClick={handleDeleteClick} className={styles.buyButton}>
+                Delete Listing
             </button>
         );
+    } else {
+        if (isEmailShown) {
+            contactSection = <p className={styles.email}> {listing.email} </p>;
+        } else {
+            contactSection = (
+                <button onClick={ContactClick} className={styles.buyButton}>
+                    Contact Seller
+                </button>
+            );
+        }
     }
 
     return (

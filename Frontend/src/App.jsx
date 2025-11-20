@@ -8,6 +8,9 @@ import ListingDetailPage from './components/ListingDetailPage.jsx';
 import CreateListingPage from './components/CreateListingPage.jsx';
 
 function App() {
+
+  const userEmail = "testingemai@scu.edu";
+
   return (
     <div>
         <Header />
@@ -16,8 +19,8 @@ function App() {
           {/* Three below divs are place holders for actual pages */}
           <Route path='/profile' element = {<div>profile</div>} />
           <Route path='/Gallery' element = {<GalleryPage />} />
-          <Route path='/listing' element = {<CreateListingPage />} />
-          <Route path='/listing/:id' element={<ListingDetailPage />} />
+          <Route path='/listing' element = {<CreateListingPage userEmail={userEmail} />} />
+          <Route path='/listing/:id' element={<ListingDetailPage userEmail={userEmail} />} />
         </Routes>
     </div>
   )

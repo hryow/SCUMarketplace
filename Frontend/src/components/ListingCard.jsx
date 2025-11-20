@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './ListingCard.module.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const amongUsNugget = "/amongNugget.jpg";
 
@@ -18,7 +20,7 @@ export default function ListingCard({ listing }) {
     return (
         <div className={styles.cardContainer}
             onClick={handleCardClick}>
-            <img src={listing.photo}></img>
+            <img src={listing.imageUrl}></img>
             <div className={styles.infoContainer}>
                 <div className={styles.title}>{listing.title}</div>
                 <div className={styles.priceDetails}>
