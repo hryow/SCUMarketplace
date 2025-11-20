@@ -6,6 +6,17 @@ export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hasAccount, setHasAccount] = useState(true);
+    const [isAnimating, setIsAnimating] = useState(false);
+
+    const switchAuthMode = () => {
+        setIsAnimating(true);
+        setTimeout(() => {
+            setHasAccount(mode => !mode)
+            setEmail('');
+            setPassword('');
+            setIsAnimating(false);
+        }, 300);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,8 +29,8 @@ export default function LoginPage() {
 
     return (
         <div className={styles.card}>
-            <div className={styles.body}>
-                <div class={styles.title}>
+            <div className={`${styles.content} ${isAnimating ? styles.hidden : ''}`}>
+                <div className={styles.title}>
                     {hasAccount ? 'Log In' : 'Sign Up'}
                 </div>
 
@@ -51,7 +62,7 @@ export default function LoginPage() {
                     <div className={styles.newUser}>
                         {hasAccount ? "First time using? " : "Already have an account? "}
                         
-                        <span className={styles.link} onClick={() => setHasAccount(!hasAccount)}>
+                        <span className={styles.link} onClick={switchAuthMode}>
                             {hasAccount ? "Sign up for free" : "Log in here"}
                         </span>
                     </div>
@@ -60,7 +71,6 @@ export default function LoginPage() {
                         {hasAccount ? 'Log In' : 'Sign Up'}
                     </button>
                 </form>
-
             </div>
         </div>
     );

@@ -7,6 +7,17 @@
     margin: 10rem auto;
 }
 
+.content {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
 .title {
     font-size: xx-large;
     margin: 2rem 0;
