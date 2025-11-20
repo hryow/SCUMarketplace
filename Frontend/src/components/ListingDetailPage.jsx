@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react';
 import styles from './ListingDetailPage.module.css';
 import { Link, useParams, useLocation } from 'react-router-dom';
 
+import Header from './Header.jsx'
+
+
 //fake data for testing/styling
 /*
         const mockData = {
@@ -65,35 +68,38 @@ export default function ListingDetailPage({userEmail}) {
     }
 
     return (
-        <div className={styles.pageContainer}>
-            <Link to="/Gallery" className = {styles.backButton}>
-            &lt; Back
-            </Link>
-            
-            <div className={styles.content}>
+        <>
+            <Header />
+            <div className={styles.pageContainer}>
+                <Link to="/Gallery" className = {styles.backButton}>
+                &lt; Back
+                </Link>
+                
+                <div className={styles.content}>
 
-                <div className={styles.image}>
-                <img src={listing.imageUrl} alt = {listing.title} className={styles.listingImage} />
-                </div>
-
-
-                <div className={styles.rightSide}>
-                    <h1 className={styles.title}> {listing.title} </h1>
-
-                    <div className={styles.listingInformation}>
-                        <span className={styles.price}> ${listing.price} </span>
-                        <span className={styles.location}> {listing.location} </span>
+                    <div className={styles.image}>
+                    <img src={listing.imageUrl} alt = {listing.title} className={styles.listingImage} />
                     </div>
-                
-                <p className={styles.lstingDesc}> {listing.description} </p>
 
-                {contactSection}
-                
+
+                    <div className={styles.rightSide}>
+                        <h1 className={styles.title}> {listing.title} </h1>
+
+                        <div className={styles.listingInformation}>
+                            <span className={styles.price}> ${listing.price} </span>
+                            <span className={styles.location}> {listing.location} </span>
+                        </div>
+                    
+                    <p className={styles.lstingDesc}> {listing.description} </p>
+
+                    {contactSection}
+                    
+                    </div>
+
+
                 </div>
-
 
             </div>
-
-        </div>
+        </>
     );
 }

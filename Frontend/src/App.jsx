@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Header from './components/Header.jsx'
 import './App.css'
 import { Route,Routes } from 'react-router-dom'
 import LoginPage from './components/LoginPage.jsx'
@@ -15,7 +14,6 @@ function App() {
   return (
     <div>
         <LoginPage />
-        <Header />
 
         <Routes>
           {/* Three below divs are place holders for actual pages */}

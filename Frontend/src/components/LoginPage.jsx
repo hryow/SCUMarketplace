@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styles from './LoginPage.module.css';
-
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hasAccount, setHasAccount] = useState(true);
     const [isAnimating, setIsAnimating] = useState(false);
+
+    const navigate = useNavigate();
 
     const switchAuthMode = () => {
         setIsAnimating(true);
@@ -25,6 +27,7 @@ export default function LoginPage() {
         } else {
             // Sign up backend
         }
+        navigate('/Gallery');
     }
 
     return (

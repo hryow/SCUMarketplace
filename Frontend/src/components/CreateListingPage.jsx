@@ -3,6 +3,8 @@ import styles from './CreateListingPage.module.css';
 import {Link, useParams} from 'react-router-dom';
 //Have not added your email to the createlistingpage
 
+import Header from './Header.jsx'
+
 export default function CreateListingPage() {
 const [listingName, setListingName] = useState('');
 const [price, setPrice] = useState('');
@@ -81,50 +83,53 @@ else{
 }
 
 return (
-        <div className={styles.pageContainer}> 
-        <Link to="/Gallery" className={styles.backButton}>
-        &lt; Back
-        </Link>                
-            
+        <>
+            <Header />
+            <div className={styles.pageContainer}> 
+            <Link to="/Gallery" className={styles.backButton}>
+            &lt; Back
+            </Link>                
+                
 
-            <form className={styles.form} onSubmit={submitListing}>
-                <label className={styles.imageUploader}>
-                     <input type="file" accept='image/*' className={styles.fileinput}
-                     onChange={handleImageUpload} />
-            
-                {imageContent}
-                </label>
-                <div className={styles.formInfo}>
-                <label>Listing Name *
-                    <input type="text" className={styles.input} value={listingName} 
-                    onChange={(e)=>setListingName(e.target.value)} required />
-                </label>
+                <form className={styles.form} onSubmit={submitListing}>
+                    <label className={styles.imageUploader}>
+                        <input type="file" accept='image/*' className={styles.fileinput}
+                        onChange={handleImageUpload} />
+                
+                    {imageContent}
+                    </label>
+                    <div className={styles.formInfo}>
+                    <label>Listing Name *
+                        <input type="text" className={styles.input} value={listingName} 
+                        onChange={(e)=>setListingName(e.target.value)} required />
+                    </label>
 
-                <div className={styles.priceAndLocation}>
-                <label className={styles.price}> $ *
-                    <input type="number" className={styles.input} value={price} 
-                    onChange={(e)=>setPrice(e.target.value)} required />
-                </label>
-                <label className={styles.location}> Location
-                    <input type="text" className={styles.input} value={location} 
-                    onChange={(e)=>setLocation(e.target.value)} required />
-                </label>
-                    </div> 
+                    <div className={styles.priceAndLocation}>
+                    <label className={styles.price}> $ *
+                        <input type="number" className={styles.input} value={price} 
+                        onChange={(e)=>setPrice(e.target.value)} required />
+                    </label>
+                    <label className={styles.location}> Location
+                        <input type="text" className={styles.input} value={location} 
+                        onChange={(e)=>setLocation(e.target.value)} required />
+                    </label>
+                        </div> 
 
-                <label>Description
-                    <textarea className={styles.textArea} value={description}
-                    onChange={(e)=>setDescription(e.target.value)} required />
-                </label>
+                    <label>Description
+                        <textarea className={styles.textArea} value={description}
+                        onChange={(e)=>setDescription(e.target.value)} required />
+                    </label>
 
-                <button type="submit" className={styles.submitButton}> 
-                Submit Listing
-                </button>
-                {isSubmitted && (
-                    <p style={{color: 'green', marginTop: '10px'}}>
-                        Successfully Submitted!</p>
-                )}
-                </div>
-            </form>
-        </div>
+                    <button type="submit" className={styles.submitButton}> 
+                    Submit Listing
+                    </button>
+                    {isSubmitted && (
+                        <p style={{color: 'green', marginTop: '10px'}}>
+                            Successfully Submitted!</p>
+                    )}
+                    </div>
+                </form>
+            </div>
+        </>
     );
 }
