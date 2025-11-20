@@ -3,7 +3,8 @@ SCUMarketplace is a web application hosting a marketplace for Santa Clara Univer
 ## Setup
 
 1. To install the dependencies, run `npm install`.
-2. To start the application, run `npm run dev` in the Frontend folder.
+2. To start the application, run `npm run dev` in the Frontend folder and run `npm start` in the Server folder. 
+- Currently, the server is configured to run on port 8080. Please make sure that there are no conflicting processes running on that port number.
 
 
 ## Description ## 
