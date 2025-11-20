@@ -35,10 +35,26 @@ export default function ListingDetailPage({userEmail}) {
         setEmailShown(true);
     };
 
+    async function deleteListing(){
+        try {
+            const response = await fetch(`/api/deletelisting/:${id}`, { 
+                method: 'POST',
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error. status: ${response.status}`);
+            }
+            const res = await response.json();
+            console.log('Success:', res);
+        } catch (error) {
+            console.error('Error deleting listing:', error);
+        }
+    }
+
     function handleDeleteClick(){
         if(window.confirm("Are you sure you want to delete this listing?")) {
             console.log(`Deleting listing ${id}...`);
             //LOGIC TO ACTUALLY DELETE LISTING FETCH
+            deleteListing();
         }
     }
 

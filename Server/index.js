@@ -191,7 +191,7 @@ app.get('/api/getlistings', (req, res) => {
 // DELETE - Delete specific listing
 // Implement if needed. Otherwise disregard.
 // Since professor is wondering what happens when a listing is sold
-app.delete('api/listings/:id', (req, res) => {
+app.delete('api/deletelisting/:id', (req, res) => {
     const id = req.params.id;
     if(!id){
         console.log('[API] Missing id');
