@@ -4,17 +4,18 @@ import styles from './Header.module.css';
 
 /* TODO: make button pressable (goes down on click)
          make "User" depend on name
-         make pfp depend on pfp */
+         make pfp depend on pfp 
+         make add new listing button go to create listing page*/
 
 export default function Header(){
     return(
         <div className={styles.container}>
             <div className={styles.profile}></div>
             <div className={styles.welcome}>Welcome, User! </div>
-            <div className={styles.addListingButton}>
+            <Link to="/listing" className={styles.addListingButton}>
                 <div className={styles.plus}>+</div>
                 <div>sell something</div>
-            </div>
+            </Link>
         </div>
     )
 }

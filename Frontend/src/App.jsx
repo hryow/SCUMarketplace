@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Header from './components/Header.jsx'
 import './App.css'
 import { Route,Routes } from 'react-router-dom'
+import LoginPage from './components/LoginPage.jsx'
 import GalleryPage from './components/GalleryPage.jsx'
 import ListingCard from './components/ListingCard.jsx'
 import ListingDetailPage from './components/ListingDetailPage.jsx';
@@ -13,8 +14,9 @@ function App() {
 
   return (
     <div>
+        <LoginPage />
         <Header />
-        {/* <ListingDetailPage /> */}
+
         <Routes>
           {/* Three below divs are place holders for actual pages */}
           <Route path='/profile' element = {<div>profile</div>} />

@@ -1,0 +1,44 @@
+.card {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 3rem;
+    width: 30rem;
+    height: 70%;
+    margin: 10rem auto;
+}
+
+.title {
+    font-size: xx-large;
+    margin: 2rem 0;
+    font-weight: 500;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    padding: 0.67rem 1rem;
+    margin: 0.67rem 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: medium;
+}
+
+.newUser {
+    align-self: flex-end;
+    padding-right: 0.2rem;
+}
+
+.link {
+    cursor: pointer;
+    font-weight: 700;
+    color: #FF4D72;
+}
+
+button {
+    margin: 4rem 0;
+    background-color: #A32035;
+    color: white;
+}

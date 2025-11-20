@@ -36,6 +36,10 @@
     cursor: pointer;
 }
 
+.addListingButton:active {
+    box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
 .plus {
     font-size: 1.5rem;
 }
