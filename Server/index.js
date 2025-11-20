@@ -2,7 +2,7 @@ const express = require('express');
 const { db } = require('pg');
 
 const app = express();
-const port = 8000;
+const port = 8080;
 
 // FOR TESTING PURPOSES ONLY
 // REMOVE LATER
@@ -217,6 +217,11 @@ app.delete('api/listings/:id', (req, res) => {
     return res.status(201).json({
         message: 'Listing deleted successfully'
     });
+});
+
+// Simple verification route for testing
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'Server is running!' });
 });
 
 app.listen(port, () => {
