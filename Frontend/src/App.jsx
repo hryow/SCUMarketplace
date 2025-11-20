@@ -13,11 +13,9 @@ function App() {
 
   return (
     <div>
-        <LoginPage />
-
         <Routes>
           {/* Three below divs are place holders for actual pages */}
-          <Route path='/profile' element = {<div>profile</div>} />
+          <Route path='/' element = {<LoginPage />} />
           <Route path='/Gallery' element = {<GalleryPage />} />
           <Route path='/listing' element = {<CreateListingPage userEmail={userEmail} />} />
           <Route path='/listing/:id' element={<ListingDetailPage userEmail={userEmail} />} />
