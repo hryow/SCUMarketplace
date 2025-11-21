@@ -109,7 +109,7 @@ app.post('/api/createuser', (req, res) =>{
 });
 
 // POST - Check if user credentials are valid
-app.get('/api/validuser', (req, res) => {
+app.post('/api/login', (req, res) => {
     const {email, password} = req.body;
     if(!email || !password){
         console.log('[API] email or password is missing');
@@ -119,11 +119,17 @@ app.get('/api/validuser', (req, res) => {
     }
     // FOR TESTING 
     // Since emails are unique, we're able to search for the singular valid user using only email and password
-    const validUser = mockUsersData.filter(data => data.email === email && data.password === password);
+    const validUser = mockUsersData.find(data => data.email === email);
     if(!validUser){
-        console.log('[API] User does not exist/entered invalid user information');
+        console.log('[API] User does not exist/entered invalid email');
          return res.status(401).json({
             error: 'Invalid user information. Please try again. If you don\'t have an account, please create an account'
+        });
+    }
+    if (validUser.password !== password) { 
+        console.log(`[API] Invalid password for user: ${email}`);
+         return res.status(401).json({
+            error: 'Invalid user information. Please try again. If you don\'t have an account, please create an account.'
         });
     }
     console.log(`[API] User successfuly found: ${validUser.email}`);
@@ -214,9 +220,7 @@ app.delete('api/deletelisting/:id', (req, res) => {
     const listingIdx = mockListingsData.indexOf(mockListingsData => mockListingsData.id === id);
     mockListingsData.splice(listingIdx, 1);
     console.log(mockListingsData); // show changes
-    return res.status(201).json({
-        message: 'Listing deleted successfully'
-    });
+    return res.status(204).end();
 });
 
 // Simple verification route for testing

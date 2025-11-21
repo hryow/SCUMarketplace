@@ -19,7 +19,7 @@ export default function ListingCard() {
             <div className={styles.infoContainer}>
                 <div className={styles.title}>{listing.title}</div>
                 <div className={styles.priceDetails}>
-                    <div className={styles.price}>$16</div>
+                    <div className={styles.price}>{listing.price}</div>
                     <Link to="/listing/:id" className={styles.details}>more details &gt;</Link>
                 </div>
             </div>

@@ -4,7 +4,6 @@ import { Link, useParams, useLocation } from 'react-router-dom';
 
 import Header from './Header.jsx'
 
-
 //fake data for testing/styling
 /*
         const mockData = {
@@ -35,13 +34,18 @@ export default function ListingDetailPage({userEmail}) {
         setEmailShown(true);
     };
 
-    async function deleteListing(){
+    async function deleteListing(id){
+        console.log('Deleting listing from server...');
         try {
-            const response = await fetch(`/api/deletelisting/:${id}`, { 
-                method: 'POST',
+            const response = await fetch(`/api/deletelisting/${id}`, {
+                method: 'DELETE',
             });
             if (!response.ok) {
                 throw new Error(`HTTP error. status: ${response.status}`);
+            }
+            if (response.status === 204) {
+                console.log('Success: Listing deleted (no content returned).');
+                return;
             }
             const res = await response.json();
             console.log('Success:', res);
@@ -54,7 +58,7 @@ export default function ListingDetailPage({userEmail}) {
         if(window.confirm("Are you sure you want to delete this listing?")) {
             console.log(`Deleting listing ${id}...`);
             //LOGIC TO ACTUALLY DELETE LISTING FETCH
-            deleteListing();
+            deleteListing(id);
         }
     }
 
