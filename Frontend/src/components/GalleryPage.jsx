@@ -5,7 +5,7 @@ import ListingCard from './ListingCard.jsx'
 import Header from './Header.jsx'
 
 
-export default function GalleryPage() {
+export default function GalleryPage({ userEmail }) {
     const [listings, setListings] = useState([]);
     
     // fetching data from backend when component mounts
@@ -17,7 +17,7 @@ export default function GalleryPage() {
                 // sort in descending order (newest listings first)
                 const sortedData = data.sort((a, b) => b.id - a.id);
                 setListings(sortedData);
-            } catch (error){
+            }catch (error){
                 console.error('Error fetching listings: ', error);
             }
         };
@@ -26,7 +26,7 @@ export default function GalleryPage() {
 
     return (
         <>
-            <Header />
+            <Header userEmail={userEmail}/>
             <div className={styles.gridContainer}>
                 {listings.map((listing) => (
                     <ListingCard 
