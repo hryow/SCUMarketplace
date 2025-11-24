@@ -1,19 +1,40 @@
 # SCUMarketplace
 SCUMarketplace is a web application hosting a marketplace for Santa Clara University students. Users can browse, buy, and sell items in a secure and convenient online environment.
+
+## Table of Contents 
+- [Description](#description)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Setup](#setup)
+- [React + Vite](#react--vite)
+- [React Compiler](#react-compiler)
+- [Expanding the ESLint configuration](#expanding-the-eslint-configuration)
+- [Documentation](#documentation)
+
+## Description  
+A website hosting a marketplace for SCU. 
+
+## Features 
+Insert features
+
+## Tech Stack
+SCUMarketplace is built with the following technologies:
+#### Frontend
+- React - Component-based library for building interactive user interfaces with efficient rendering and a rich ecosystem
+- Vite - Modern build tool providing fast hot module replacement (HMR) and optimized development experience
+#### Backend
+- Node.js - Event-driven JavaScript runtime for handling multiple concurrent users efficiently
+- Express - Lightweight web framework for building REST APIs and managing server-side routing
+#### Database 
+- PostgreSQL - Robust relational database providing transactional integrity, complex query support, and scalability for handling users, listings, and transactions
+
 ## Setup
 
 1. To install the dependencies, run `npm install`.
 2. To start the application, run `npm run dev` in the Frontend folder and run `npm start` in the Server folder. 
 - Currently, the server is configured to run on port 8080. Please make sure that there are no conflicting processes running on that port number.
 
-
-## Description ## 
-A website hosting a marketplace for SCU. 
-
-## Features ##
-Insert features
-
-# React + Vite
+## React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -33,8 +54,10 @@ If you are developing a production application, we recommend using TypeScript wi
 ## Documentation
 Project documentation is organized in the [`/doc`](/doc) folder:
 
-- [UML Diagram](./doc/UMLDiagram.PNG) - Class diagram
-- [ER Diagram](./doc/ERDiagram.PNG) - Database schema and relationships
+- [Class Diagram](./doc/Diagrams/ClassDiagram.PNG) - Client-Server Architecture with API endpoints
+- [ER Diagram](./doc/Diagrams/ERDiagram.PNG) - Database schema and relationships
+- [UML Activity Diagram](./doc/Diagrams/UMLActivityDiagram.PNG) - User workflow
+- [UML Sequence Diagram](./doc/Diagrams/UMLSequenceDiagram.PNG) -  Message flow between User, Frontend, Server/Backend, and Database
 - [Technology Plan](./doc/TechnologyPlan.md) - Tech stack and architecture decisions
 - [Implementation Plan](./doc/ImplementationPlan.md) - Project timeline and milestones
 - [System Requirements](./doc/SystemRequirements.pdf) - System requirements
