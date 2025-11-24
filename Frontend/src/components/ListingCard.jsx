@@ -12,6 +12,14 @@ const amongUsNugget = "/amongNugget.jpg";
 export default function ListingCard() {
     // fetch array of data, populate listing card fields with certain data
     // when onclick link, get key and fetch info to populate page w the array of data
+    const navigate = useNavigate();
+
+    // Define the click handler
+    function handleCardClick() {
+        // Example: navigate to the listing's detail page using its id
+        navigate(`/listing/${listingData.id}`);
+    }
+
     return (
         <div className={styles.cardContainer}
             onClick={handleCardClick}>
@@ -20,7 +28,7 @@ export default function ListingCard() {
                 <div className={styles.title}>{listing.title}</div>
                 <div className={styles.priceDetails}>
                     <div className={styles.price}>$16</div>
-                    <Link to="/listing/:id" className={styles.details}>more details &gt;</Link>
+                    <Link to="/listing/${listingData.id}" className={styles.details}>more details &gt;</Link>
                 </div>
             </div>
         </div>

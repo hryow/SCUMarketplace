@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import styles from './CreateListingPage.module.css';
 import {Link, useParams} from 'react-router-dom';
-//Have not added your email to the createlistingpage
+// Have not added your email to the createlistingpage
 
 import Header from './Header.jsx'
 
