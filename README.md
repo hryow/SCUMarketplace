@@ -39,20 +39,16 @@ SCUMarketplace is built with the following technologies:
 This project uses a three-tier testing approach to ensure code quality and reliability.
 
 ### Unit Testing (Vitest)
-Test individual React components and functions:  
-`npm run test` in the Frontend folder
+Test individual React components and functions: `npm run test` in the Frontend folder
 
 ### Integration Testing (Jest)
-Test backend API endpoints and database interactions:    
-`npm run test:integration` in the Server folder 
+Test backend API endpoints and database interactions: `npm run test:integration` in the Server folder 
 
 ### End-to-End Testing (Cypress)
-Test complete user workflows in the browser: 
-`npm run cypress:open`
+Test complete user workflows in the browser: `npm run cypress:open`
 
 ### Running ALL Tests
-To run all test suites before pushing code: 
-`npm run test:all`
+To run all test suites before pushing code: `npm run test:all`  
 See [Testing Documentation](./doc/TestingGuide.md) for detailed testing guidelines. 
 
 ## React + Vite
