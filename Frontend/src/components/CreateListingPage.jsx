@@ -1,11 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import styles from './CreateListingPage.module.css';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useParams, useNavigate} from 'react-router-dom';
 // Have not added your email to the createlistingpage
 
 import Header from './Header.jsx'
 
 export default function CreateListingPage({ userEmail }) {
+const navigate = useNavigate(); // Initialize the hook
 const [listingName, setListingName] = useState('');
 const [price, setPrice] = useState('');
 const [location, setLocation] = useState('');
@@ -15,10 +16,21 @@ const [imagePreview, setImagePreview] = useState(null);
 
 const[isSubmitted, setSubmitted] = useState(false);
 
+/* TODO: 
+    - Redirect to gallery page after submission
+*/
+
 async function submitListing(event){
     event.preventDefault();
-    console.log(`Adding listing to server`)
-    console.log(listingName, price, location, description,imageFile);    
+    // Validate image upload
+    if (!imageFile) {
+        alert('Please upload an image for your listing');
+        return;
+    }
+
+    console.log(`Adding listing to server`);
+
+    console.log(listingName, price, description, location,imageFile);    
 
     const listingData = {
         title: listingName,
@@ -42,9 +54,13 @@ async function submitListing(event){
         }
         const res = await response.json();
         console.log('Success:', res);
+        navigate('/Gallery'); // Redirect to Gallery page 
+
     } catch (error) {
         console.error('Error submitting listing:', error);
     }
+
+    // navigate('/Gallery'); // Redirect to Gallery page 
 
     //clear form after submission
     setListingName('');
@@ -56,7 +72,7 @@ async function submitListing(event){
 
     setSubmitted(true);
 
-    setTimeout(() => setSubmitted(false), 3000);
+    // setTimeout(() => setSubmitted(false), 3000);
 }
 
 function handleImageUpload(event) {
@@ -94,28 +110,31 @@ return (
                 <form className={styles.form} onSubmit={submitListing}>
                     <label className={styles.imageUploader}>
                         <input type="file" accept='image/*' className={styles.fileinput}
-                        onChange={handleImageUpload} />
+                        onChange={handleImageUpload}/>
                 
                     {imageContent}
-                    </label>
+                    </label> 
                     <div className={styles.formInfo}>
-                    <label>Listing Name *
+                    <label> <b>Seller:</b>
+                        <div>{userEmail}</div>
+                    </label>
+                    <label><b>Listing Name *</b>
                         <input type="text" className={styles.input} value={listingName} 
                         onChange={(e)=>setListingName(e.target.value)} required />
                     </label>
 
                     <div className={styles.priceAndLocation}>
-                    <label className={styles.price}> $ *
+                    <label className={styles.price}> <b>$ *</b>
                         <input type="number" className={styles.input} value={price} 
                         onChange={(e)=>setPrice(e.target.value)} required />
                     </label>
-                    <label className={styles.location}> Location
+                    <label className={styles.location}> <b>Location *</b>
                         <input type="text" className={styles.input} value={location} 
                         onChange={(e)=>setLocation(e.target.value)} required />
                     </label>
                         </div> 
 
-                    <label>Description
+                    <label><b>Description *</b>
                         <textarea className={styles.textArea} value={description}
                         onChange={(e)=>setDescription(e.target.value)} required />
                     </label>
@@ -123,11 +142,10 @@ return (
                     <button type="submit" className={styles.submitButton}> 
                         Submit Listing
                     </button>
-                    <div>{userEmail}</div>
-                    {isSubmitted && (
+                    {/* {isSubmitted && (
                         <p style={{color: 'green', marginTop: '10px'}}>
                             Successfully Submitted!</p>
-                    )}
+                    )} */}
                     </div>
                 </form>
             </div>

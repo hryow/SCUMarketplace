@@ -34,6 +34,9 @@
 
 .addListingButton:hover {
     cursor: pointer;
+    color: white;
+    background-color: #862633;
+    border: 1px solid white;
 }
 
 .addListingButton:active {
