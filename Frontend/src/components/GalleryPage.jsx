@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styles from './GalleryPage.module.css';
-import ListingCard from './ListingCard.jsx'
+import ListingCard from './ListingCard.jsx' 
 
 import Header from './Header.jsx'
-
 
 export default function GalleryPage({ userEmail }) {
     const [listings, setListings] = useState([]);
     
-    // fetching data from backend when component mounts
     useEffect(() => {
         const fetchListings = async() => {
             try{
@@ -30,6 +28,7 @@ export default function GalleryPage({ userEmail }) {
             <div className={styles.gridContainer}>
                 {listings.map((listing) => (
                     <ListingCard 
+                        key={listing.id}
                         listingData = {listing}
                     />
                 ))}

@@ -10,6 +10,7 @@ export default function LoginPage({ setUserEmail }) {
     const [bio, setBio] = useState('');
     const [hasAccount, setHasAccount] = useState(true);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
 
     const navigate = useNavigate();
 
@@ -23,6 +24,7 @@ export default function LoginPage({ setUserEmail }) {
             setPfp('');
             setBio('');
             setIsAnimating(false);
+            setErrorMessage('');
         }, 300);
     }
 
@@ -37,7 +39,8 @@ export default function LoginPage({ setUserEmail }) {
             });
             const data = await response.json();
             if (!response.ok) {
-                throw new Error('Failed to create account.');
+                setErrorMsg(`Sign up failed: ${data.message || 'Please retry.'}`)
+                return;
             }
             console.log('Account created successfully');
             return; 
@@ -58,7 +61,8 @@ export default function LoginPage({ setUserEmail }) {
             });
             const data = await response.json();
             if (!response.ok) {
-                throw new Error('Login failed: check credentials.');
+                setErrorMsg(`Login failed: ${data.message || 'Please retry.'}`)
+                return;
             }
             console.log('Login successful:', data); 
             return data;
@@ -72,6 +76,7 @@ export default function LoginPage({ setUserEmail }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
+            let success = false;
             if (hasAccount) {
                 // Log in backend
                 await login();
@@ -79,7 +84,13 @@ export default function LoginPage({ setUserEmail }) {
                 // Sign up backend
                 await createAccount();
             }
-            navigate('/Gallery');
+            if (success) {
+                console.log(`${hasAccount ? 'Login' : 'Sign up'} successful!`)
+                setUserEmail(email);
+                navigate('/Gallery');
+            } else {
+                console.log(`Failed to ${hasAccount ? 'log in' : 'sign up'}. Check the error message.`);
+            }
         } catch(error){
             console.log(`Failed to ${hasAccount ? 'log in' : 'sign up'}. Please try again.`)
         }
@@ -88,13 +99,19 @@ export default function LoginPage({ setUserEmail }) {
         navigate('/Gallery');
     }
 
-    // TODO: for the sign up page: add missing fields: name, pfp, and bio
     return (
         <div className={styles.card}>
             <div className={`${styles.content} ${isAnimating ? styles.hidden : ''}`}>
                 <div className={styles.title}>
                     {hasAccount ? 'Log In' : 'Sign Up'}
                 </div>
+
+                {/* Display error message */}
+                {errorMessage && (
+                    <div className={styles.error} style={{ color: 'red', marginBottom: '10px' }}>
+                        {errorMessage}
+                    </div>
+                )}
 
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <input
@@ -120,6 +137,40 @@ export default function LoginPage({ setUserEmail }) {
                         required
                     >
                     </input>
+                    
+                    {/* Additonal fields for sign-up mode */}
+                    {!hasAccount && (
+                        <>
+                            <input
+                                className={styles.field}
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="Name"
+                                required
+                            />
+                            <input
+                                className={styles.field}
+                                type="url"
+                                id="pfp"
+                                name="pfp"
+                                value={pfp}
+                                onChange={(e) => setPfp(e.target.value)}
+                                placeholder="Profile Picture URL (Optional)"
+                            />
+                            <textarea
+                                className={styles.field}
+                                id="bio"
+                                name="bio"
+                                value={bio}
+                                onChange={(e) => setBio(e.target.value)}
+                                placeholder="Short Bio (Optional)"
+                                rows="3"
+                            />
+                        </>
+                    )}
 
                     <div className={styles.newUser}>
                         {hasAccount ? "First time using? " : "Already have an account? "}
