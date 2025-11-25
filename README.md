@@ -23,10 +23,11 @@ MVP Requirements:
 - Users sign up with a school email (🟡)
   - If a user doesn’t have a school email, they cannot use the platform (🟡)
   - Users information will not be collected or stored (🟡)
-  - Email will be verified (🟡)
-✅ : met
-❌ : not met
-🟡 : not tested yet
+  - Email will be verified (🟡)  
+
+✅ : met  
+❌ : not met  
+🟡 : not tested yet  
 
 ## Tech Stack
 SCUMarketplace is built with the following technologies:
