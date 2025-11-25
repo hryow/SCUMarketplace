@@ -59,9 +59,7 @@ async function submitListing(event){
     } catch (error) {
         console.error('Error submitting listing:', error);
     }
-
-    // navigate('/Gallery'); // Redirect to Gallery page 
-
+    
     //clear form after submission
     setListingName('');
     setPrice('');

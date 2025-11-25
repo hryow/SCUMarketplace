@@ -18,7 +18,7 @@ export default function ListingCard({ listingData }) {
                 <div className={styles.priceDetails}>
                     <div className={styles.price}>${price}</div>
                     <Link to={`/listing/${id}`} className={styles.details} onClick={(e) => e.stopPropagation()}>
-                        more details &gt;
+                        More Details &gt;
                     </Link>
                 </div>
             </div>

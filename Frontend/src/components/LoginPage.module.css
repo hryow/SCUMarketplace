@@ -3,14 +3,19 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     padding: 3rem;
     width: 30rem;
-    height: 70%;
+    max-height: 500px;
     margin-top: 5rem auto;
+    transition: max-height 0.8s ease;
+}
+
+.card.signup {
+    max-height: 800px;
 }
 
 .content {
     opacity: 1;
     transform: translateX(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 1s ease, transform 1s ease;
 }
 
 .hidden {
@@ -45,15 +50,21 @@
 .link {
     cursor: pointer;
     font-weight: 700;
-    color: #FF4D72;
+    color: #A32035;
 }
 
 .link:hover {
     filter: brightness(0.8);
+    text-decoration: underline;
 }
 
 button {
     margin: 4rem 0;
     background-color: #A32035;
     color: white;
+}
+
+button:hover {
+    background-color: #862633;
+    cursor: pointer;
 }

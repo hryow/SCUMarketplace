@@ -100,7 +100,8 @@ export default function LoginPage({ setUserEmail }) {
     }
 
     return (
-        <div className={styles.card}>
+        <div className={`${styles.card} ${!hasAccount ? styles.signup : ''}`}>
+
             <div className={`${styles.content} ${isAnimating ? styles.hidden : ''}`}>
                 <div className={styles.title}>
                     {hasAccount ? 'Log In' : 'Sign Up'}
