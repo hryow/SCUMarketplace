@@ -18,7 +18,7 @@ import Header from './Header.jsx'
 */
 
 export default function ListingDetailPage({userEmail}) {
-    //id is whatever will be used to differntiate listings
+    //id is whatever will be used to differentiate listings
     const { id } = useParams();
 
     // get listing data from ListingCard
