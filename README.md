@@ -53,7 +53,7 @@ Test complete user workflows in the browser:
 ### Running ALL Tests
 To run all test suites before pushing code: 
 `npm run test:all`
-See [Testing Documentation](./doc/testing.guide.md) for detailed testing guidelines. 
+See [Testing Documentation](./doc/TestingGuide.md) for detailed testing guidelines. 
 
 ## React + Vite
 
@@ -82,4 +82,4 @@ Project documentation is organized in the [`/doc`](/doc) folder:
 - [Technology Plan](./doc/TechnologyPlan.md) - Tech stack and architecture decisions
 - [Implementation Plan](./doc/ImplementationPlan.md) - Project timeline and milestones
 - [System Requirements](./doc/SystemRequirements.pdf) - System requirements
-- [Testing Documentation](./doc/testing.guide.md) - Testing guidelines
+- [Testing Documentation](./doc/TestingGuide.md) - Testing guidelines
