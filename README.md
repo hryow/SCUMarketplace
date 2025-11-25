@@ -6,6 +6,7 @@ SCUMarketplace is a web application hosting a marketplace for Santa Clara Univer
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Setup](#setup)
+- [Testing](#testing)
 - [React + Vite](#react--vite)
 - [React Compiler](#react-compiler)
 - [Expanding the ESLint configuration](#expanding-the-eslint-configuration)
@@ -19,13 +20,13 @@ Insert features
 
 ## Tech Stack
 SCUMarketplace is built with the following technologies:
-#### Frontend
+### Frontend
 - React - Component-based library for building interactive user interfaces with efficient rendering and a rich ecosystem
 - Vite - Modern build tool providing fast hot module replacement (HMR) and optimized development experience
-#### Backend
+### Backend
 - Node.js - Event-driven JavaScript runtime for handling multiple concurrent users efficiently
 - Express - Lightweight web framework for building REST APIs and managing server-side routing
-#### Database 
+### Database 
 - PostgreSQL - Robust relational database providing transactional integrity, complex query support, and scalability for handling users, listings, and transactions
 
 ## Setup
@@ -33,6 +34,22 @@ SCUMarketplace is built with the following technologies:
 1. To install the dependencies, run `npm install`.
 2. To start the application, run `npm run dev` in the Frontend folder and run `npm start` in the Server folder. 
 - Currently, the server is configured to run on port 8080. Please make sure that there are no conflicting processes running on that port number.
+
+## Testing 
+This project uses a three-tier testing approach to ensure code quality and reliability.
+
+### Unit Testing (Vitest)
+Test individual React components and functions: `npm run test` in the Frontend folder
+
+### Integration Testing (Jest)
+Test backend API endpoints and database interactions: `npm run test:integration` in the Server folder 
+
+### End-to-End Testing (Cypress)
+Test complete user workflows in the browser: `npm run cypress:open`
+
+### Running ALL Tests
+To run all test suites before pushing code: `npm run test:all`  
+See [Testing Documentation](./doc/TestingGuide.md) for detailed testing guidelines. 
 
 ## React + Vite
 
@@ -61,3 +78,4 @@ Project documentation is organized in the [`/doc`](/doc) folder:
 - [Technology Plan](./doc/TechnologyPlan.md) - Tech stack and architecture decisions
 - [Implementation Plan](./doc/ImplementationPlan.md) - Project timeline and milestones
 - [System Requirements](./doc/SystemRequirements.pdf) - System requirements
+- [Testing Documentation](./doc/TestingGuide.md) - Testing guidelines
