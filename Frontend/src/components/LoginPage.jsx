@@ -24,7 +24,7 @@ export default function LoginPage({ setUserEmail }) {
             setPfp('');
             setBio('');
             setIsAnimating(false);
-            setErrorMessage('');
+            setErrorMsg('');
         }, 300);
     }
 
@@ -107,9 +107,9 @@ export default function LoginPage({ setUserEmail }) {
                 </div>
 
                 {/* Display error message */}
-                {errorMessage && (
+                {errorMsg && (
                     <div className={styles.error} style={{ color: 'red', marginBottom: '10px' }}>
-                        {errorMessage}
+                        {errorMsg}
                     </div>
                 )}
 
