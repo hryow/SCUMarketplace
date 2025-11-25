@@ -173,6 +173,7 @@ app.post('/api/createlisting', (req, res) => {
         id: newId,
         title: title,
         price: price,
+        description: description,
         photo: photo,
         location: location,
         email: email
