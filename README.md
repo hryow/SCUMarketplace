@@ -2,7 +2,6 @@
 SCUMarketplace is a web application hosting a marketplace for Santa Clara University students. Users can browse, buy, and sell items in a secure and convenient online environment.
 
 ## Table of Contents 
-- [Description](#description)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Setup](#setup)
@@ -12,11 +11,22 @@ SCUMarketplace is a web application hosting a marketplace for Santa Clara Univer
 - [Expanding the ESLint configuration](#expanding-the-eslint-configuration)
 - [Documentation](#documentation)
 
-## Description  
-A website hosting a marketplace for SCU. 
-
 ## Features 
-Insert features
+MVP Requirements: 
+- Ability to see a gallery of things to buy, ordered by most recent of everything for sale (🟡)
+- Ability to see core details like cost, title, and photos, and descriptions (🟡)
+- Ability to add new listings (🟡)
+  - Sellers should be able to specify details such as title, cost, description, tags/categories, and photos (🟡)
+- Ability to buy the product being listed (🟡)
+  - Asking to buy the product sends a message to the seller (🟡)
+  - The seller can mark an item as ‘sold’ which causes the listing to be taken down (🟡)
+- Users sign up with a school email (🟡)
+  - If a user doesn’t have a school email, they cannot use the platform (🟡)
+  - Users information will not be collected or stored (🟡)
+  - Email will be verified (🟡)
+✅ : met
+❌ : not met
+🟡 : not tested yet
 
 ## Tech Stack
 SCUMarketplace is built with the following technologies:
