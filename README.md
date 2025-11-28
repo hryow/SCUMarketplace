@@ -38,7 +38,7 @@ SCUMarketplace is built with the following technologies:
 - Node.js - Event-driven JavaScript runtime for handling multiple concurrent users efficiently
 - Express - Lightweight web framework for building REST APIs and managing server-side routing
 ### Database 
-- PostgreSQL - Robust relational database providing transactional integrity, complex query support, and scalability for handling users, listings, and transactions
+- PostgreSQL - Robust relational database providing transactional integrity, complex query support, and scalability for handling users, listings, photos, and transactions
 
 ## Setup
 
