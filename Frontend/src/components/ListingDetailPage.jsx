@@ -12,7 +12,7 @@ import Header from './Header.jsx'
             location: "Swig Hall!",
             description: "Super rare nugget like an among us imposter from the imposter",
             email: "sellersemail@scu.edu",
-            imageUrl: "/amongNugget.jpg"  
+            photo: "/amongNugget.jpg"  
         };
             setListing(mockData);
 */
@@ -98,7 +98,7 @@ export default function ListingDetailPage({userEmail}) {
                 <div className={styles.content}>
 
                     <div className={styles.image}>
-                    <img src={listing.imageUrl} alt = {listing.title} className={styles.listingImage} />
+                    <img src={listing.photo} alt = {listing.title} className={styles.listingImage} />
                     </div>
 
 
