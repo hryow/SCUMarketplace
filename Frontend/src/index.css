@@ -2,7 +2,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #F6F6F6;
 }
 
 :root {
@@ -22,11 +21,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #99a4ac;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #758592;
 }
 
 body {
@@ -67,7 +66,7 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #758592;
   }
   button {
     background-color: #f9f9f9;

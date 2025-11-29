@@ -20,10 +20,10 @@ export default function ListingCard({ listingData }) {
                     <Link 
                         to={`/listing/${id}`} 
                         state={{ listing: listingData }}
-                        className={styles.details} 
+                        className={styles.moreDetails} 
                         onClick={(e) => e.stopPropagation()}
                     >
-                        More Details &gt;
+                        more details &gt;
                     </Link>
                 </div>
             </div>
