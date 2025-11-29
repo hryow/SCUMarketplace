@@ -8,24 +8,14 @@ export default function LoginPage({ setUserEmail }) {
     const [name, setName] = useState('');
     const [pfp, setPfp] = useState('');
     const [bio, setBio] = useState('');
-    const [hasAccount, setHasAccount] = useState(true);
-    const [isAnimating, setIsAnimating] = useState(false);
+    const [loginMode, setloginMode] = useState(true);
     const [errorMsg, setErrorMsg] = useState('');
 
     const navigate = useNavigate();
 
     const switchAuthMode = () => {
-        setIsAnimating(true);
-        setTimeout(() => {
-            setHasAccount(mode => !mode)
-            setEmail('');
-            setPassword('');
-            setName('');
-            setPfp('');
-            setBio('');
-            setIsAnimating(false);
-            setErrorMsg('');
-        }, 300);
+        setloginMode(mode => !mode)
+        setErrorMsg('');
     }
 
     async function createAccount(){
@@ -77,22 +67,24 @@ export default function LoginPage({ setUserEmail }) {
         e.preventDefault();
         try{
             let success = false;
-            if (hasAccount) {
-                // Log in backend
+            if (loginMode) {
+                // CHECK IF USER HAS AN ACCOUNT
+                // IF ACCOUNT DOESN'T EXIST, ASK TO SIGNUP
                 await login();
-            } else {
-                // Sign up backend
+            } else { // signupMode
+                // CHECK IF USER HAS AN ACCOUNT
+                // IF ACCOUNT ALREADY EXISTS, ASK TO LOGIN
                 await createAccount();
             }
             if (success) {
-                console.log(`${hasAccount ? 'Login' : 'Sign up'} successful!`)
+                console.log(`${loginMode ? 'Login' : 'Sign up'} successful!`)
                 setUserEmail(email);
                 navigate('/Gallery');
             } else {
-                console.log(`Failed to ${hasAccount ? 'log in' : 'sign up'}. Check the error message.`);
+                console.log(`Failed to ${loginMode ? 'log in' : 'sign up'}. Check the error message.`);
             }
         } catch(error){
-            console.log(`Failed to ${hasAccount ? 'log in' : 'sign up'}. Please try again.`)
+            console.log(`Failed to ${loginMode ? 'log in' : 'sign up'}. Please try again.`)
         }
         console.log("Email: " + email);
         setUserEmail(email);
@@ -100,11 +92,11 @@ export default function LoginPage({ setUserEmail }) {
     }
 
     return (
-        <div className={`${styles.card} ${!hasAccount ? styles.signup : ''}`}>
+        <div className={`${styles.card} ${!loginMode ? styles.signup : ''}`}>
 
-            <div className={`${styles.content} ${isAnimating ? styles.hidden : ''}`}>
+            <div className={styles.content}>
                 <div className={styles.title}>
-                    {hasAccount ? 'Log In' : 'Sign Up'}
+                    {loginMode ? 'Log In' : 'Sign Up'}
                 </div>
 
                 {/* Display error message */}
@@ -135,54 +127,52 @@ export default function LoginPage({ setUserEmail }) {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="password"
-                        required
+                        required={!loginMode}
                     >
                     </input>
                     
                     {/* Additonal fields for sign-up mode */}
-                    {!hasAccount && (
-                        <>
-                            <input
-                                className={styles.field}
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Name"
-                                required
-                            />
-                            <input
-                                className={styles.field}
-                                type="url"
-                                id="pfp"
-                                name="pfp"
-                                value={pfp}
-                                onChange={(e) => setPfp(e.target.value)}
-                                placeholder="Profile Picture URL (Optional)"
-                            />
-                            <textarea
-                                className={styles.field}
-                                id="bio"
-                                name="bio"
-                                value={bio}
-                                onChange={(e) => setBio(e.target.value)}
-                                placeholder="Short Bio (Optional)"
-                                rows="3"
-                            />
-                        </>
-                    )}
+                    <div className={`${styles.expandableFields} ${!loginMode ? styles.show : ''}`}>
+                        <input
+                            className={styles.field}
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="name"
+                            required={!loginMode}
+                        />
+                        <input
+                            className={styles.field}
+                            type="url"
+                            id="pfp"
+                            name="pfp"
+                            value={pfp}
+                            onChange={(e) => setPfp(e.target.value)}
+                            placeholder="profile picture URL (optional)"
+                        />
+                        <textarea
+                            className={styles.field}
+                            id="bio"
+                            name="bio"
+                            value={bio}
+                            onChange={(e) => setBio(e.target.value)}
+                            placeholder="short bio (optional)"
+                            rows="3"
+                        />
+                    </div>
 
                     <div className={styles.newUser}>
-                        {hasAccount ? "First time using? " : "Already have an account? "}
+                        {loginMode ? "First time using? " : "Already have an account? "}
                         
                         <span className={styles.link} onClick={switchAuthMode}>
-                            {hasAccount ? "Sign up for free" : "Log in here"}
+                            {loginMode ? "Sign up for free" : "Log in here"}
                         </span>
                     </div>
 
                     <button type="submit">
-                        {hasAccount ? 'Log In' : 'Sign Up'}
+                        {loginMode ? 'Log In' : 'Sign Up'}
                     </button>
                 </form>
             </div>
