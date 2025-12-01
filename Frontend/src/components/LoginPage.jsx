@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './LoginPage.module.css';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function LoginPage({ setUserEmail }) {
     const [email, setEmail] = useState('');
@@ -92,6 +93,13 @@ export default function LoginPage({ setUserEmail }) {
     }
 
     return (
+        <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            style={{ width: '100%', height: '100%' }}
+        >
         <div className={`${styles.card} ${!loginMode ? styles.signup : ''}`}>
 
             <div className={styles.content}>
@@ -177,5 +185,6 @@ export default function LoginPage({ setUserEmail }) {
                 </form>
             </div>
         </div>
+        </motion.div>
     );
 }

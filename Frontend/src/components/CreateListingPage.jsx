@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import styles from './CreateListingPage.module.css';
 import {Link, useParams, useNavigate} from 'react-router-dom';
+import { motion } from 'framer-motion';
 // Have not added your email to the createlistingpage
 
 import Header from './Header.jsx'
@@ -15,10 +16,6 @@ const [imageFile, setImage] = useState(null);
 const [imagePreview, setImagePreview] = useState(null);
 
 const[isSubmitted, setSubmitted] = useState(false);
-
-/* TODO: 
-    - Redirect to gallery page after submission
-*/
 
 async function submitListing(event){
     event.preventDefault();
@@ -59,7 +56,7 @@ async function submitListing(event){
     } catch (error) {
         console.error('Error submitting listing:', error);
     }
-    
+
     //clear form after submission
     setListingName('');
     setPrice('');
@@ -78,6 +75,14 @@ function handleImageUpload(event) {
     if (file){
         setImage(file);
         setImagePreview(URL.createObjectURL(file));
+
+        // Convert to Base64
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            // reader.result contains the Base64 string
+            setImage(reader.result); // Store Base64 instead of file object
+        };
+        reader.readAsDataURL(file);
     }
 }
 
@@ -97,7 +102,13 @@ else{
 }
 
 return (
-        <>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            style={{ width: '100%', height: '100%' }}
+        >
             <Header userEmail={userEmail} />
             <div className={styles.pageContainer}> 
             <Link to="/Gallery" className={styles.backButton}>
@@ -147,6 +158,6 @@ return (
                     </div>
                 </form>
             </div>
-        </>
+        </motion.div>
     );
 }
