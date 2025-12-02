@@ -16,8 +16,5 @@ router.post('/createlisting', controller.createListing);
 // Route for fetching all listings
 router.get('/getlistings', controller.getListings);
 
-// Route for buying the request placeholder
-router.post('/buylisting', controller.buyListing);
-
 // Export router to use (index.js)
 module.exports = router;
