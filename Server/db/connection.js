@@ -20,5 +20,5 @@ const pool = new Pool({
   port: process.env.DB_PORT,         // port #
 });
 
-// Need to export the pool to be be imported and used in controller.js
+// Need to export the pool to be imported and used in controller.js
 module.exports = pool; 
