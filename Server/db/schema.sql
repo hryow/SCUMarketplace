@@ -71,3 +71,8 @@ BEGIN
     RETURN NEW; 
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_mark_sold
+AFTER INSERT ON transactions
+FOR EACH ROW
+EXECUTE FUNCTION mark_listing_sold();
