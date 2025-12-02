@@ -6,9 +6,6 @@ import { motion } from 'framer-motion';
 export default function LoginPage({ setUserEmail }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [pfp, setPfp] = useState('');
-    const [bio, setBio] = useState('');
     const [loginMode, setloginMode] = useState(true);
     const [errorMsg, setErrorMsg] = useState('');
 
@@ -21,23 +18,24 @@ export default function LoginPage({ setUserEmail }) {
 
     async function createAccount(){
         try {
-            const response = await fetch('/api/users/register', {
+            const response = await fetch('/api/createuser', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password, name, pfp, bio }),
+                body: JSON.stringify({ email, password}),
             });
             const data = await response.json();
             if (!response.ok) {
-                setErrorMsg(`Sign up failed: ${data.message || 'Please retry.'}`)
-                return;
+                setErrorMsg(`Sign up failed: ${data.error || 'Please retry.'}`)
+                return false;
             }
             console.log('Account created successfully');
-            return; 
+            return true; 
         } catch (error) {
             console.error('Sign up error:', error);
-            throw error;
+            setErrorMsg('An error occurred during sign up. Please try again');
+            return false; 
         }
     }
 
@@ -52,44 +50,50 @@ export default function LoginPage({ setUserEmail }) {
             });
             const data = await response.json();
             if (!response.ok) {
-                setErrorMsg(`Login failed: ${data.message || 'Please retry.'}`)
-                return;
+                setErrorMsg(`Login failed: ${data.error || 'Please retry.'}`)
+                return false; 
             }
             console.log('Login successful:', data); 
-            return data;
+            return true; 
 
         } catch (error) {
             console.error('Login error:', error);
-            throw error;
+            setErrorMsg('An error occurred during login. Please try again.');
+            return false; 
         }
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrorMsg(''); 
         try{
             let success = false;
             if (loginMode) {
-                // CHECK IF USER HAS AN ACCOUNT
-                // IF ACCOUNT DOESN'T EXIST, ASK TO SIGNUP
-                await login();
-            } else { // signupMode
-                // CHECK IF USER HAS AN ACCOUNT
-                // IF ACCOUNT ALREADY EXISTS, ASK TO LOGIN
-                await createAccount();
-            }
-            if (success) {
-                console.log(`${loginMode ? 'Login' : 'Sign up'} successful!`)
-                setUserEmail(email);
-                navigate('/Gallery');
-            } else {
-                console.log(`Failed to ${loginMode ? 'log in' : 'sign up'}. Check the error message.`);
+                success = await login();
+
+                if (success) {
+                    console.log('Login successful!');
+                    setUserEmail(email);
+                    navigate('/Gallery'); // Navigate on successful login
+                } else {
+                    console.log('Login failed. Check the error message.');
+                }
+            } else { // Sign Up Mode
+                success = await createAccount();
+                if (success) {
+                    console.log('Sign up successful!');
+                    setloginMode(true); 
+                    setErrorMsg('Account created successfully! Please log in with your new credentials.');
+                    setEmail(''); 
+                    setPassword('');
+                } else {
+                    console.log('Sign up failed. Check the error message.');
+                }
             }
         } catch(error){
-            console.log(`Failed to ${loginMode ? 'log in' : 'sign up'}. Please try again.`)
+            console.log(`An unexpected error occurred: ${error.message}`);
+            setErrorMsg('An unexpected error occurred. Please check your connection and try again.');
         }
-        console.log("Email: " + email);
-        setUserEmail(email);
-        navigate('/Gallery');
     }
 
     return (
@@ -138,38 +142,6 @@ export default function LoginPage({ setUserEmail }) {
                         required={!loginMode}
                     >
                     </input>
-                    
-                    {/* Additonal fields for sign-up mode */}
-                    <div className={`${styles.expandableFields} ${!loginMode ? styles.show : ''}`}>
-                        <input
-                            className={styles.field}
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            placeholder="name"
-                            required={!loginMode}
-                        />
-                        <input
-                            className={styles.field}
-                            type="url"
-                            id="pfp"
-                            name="pfp"
-                            value={pfp}
-                            onChange={(e) => setPfp(e.target.value)}
-                            placeholder="profile picture URL (optional)"
-                        />
-                        <textarea
-                            className={styles.field}
-                            id="bio"
-                            name="bio"
-                            value={bio}
-                            onChange={(e) => setBio(e.target.value)}
-                            placeholder="short bio (optional)"
-                            rows="3"
-                        />
-                    </div>
 
                     <div className={styles.newUser}>
                         {loginMode ? "First time using? " : "Already have an account? "}

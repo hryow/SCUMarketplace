@@ -11,33 +11,22 @@ const port = 8080;
 const mockUsersData = [
     {
         email: 'jdoe67@scu.edu',
-        password: '676767',
-        name: 'Jane Doe',
-        pfp: 'https://placehold.co/400x300/FFD700/000?text=JD',
-        bio: 'blah blah blah im so epic'
+        password: '676767'
     },
     {
         email: 'peepeepoopoo@scu.edu',
-        password: '12345',
-        name: 'John Smith',
-        pfp: 'https://placehold.co/400x300/FFD700/000?text=JS',
-        bio: 'blah blah blah im so epic'
+        password: '12345'
     },
     {
         email: 'gymrat234@scu.edu',
-        password: '00000000',
-        name: 'Bartholomew Richards',
-        pfp: 'https://placehold.co/400x300/FFD700/000?text=BR',
-        bio: 'blah blah blah im so epic'
+        password: '00000000'
     },
     {
         email: 'sixsevennn@scu.edu',
-        password: '666777',
-        name: 'Titus Titron',
-        pfp: 'https://placehold.co/400x300/FFD700/000?text=TT',
-        bio: 'blah blah blah im so epic'
+        password: '666777'
     }
 ];
+
 // Listings
 let id = 4;
 const mockListingsData = [
@@ -71,7 +60,6 @@ const mockListingsData = [
 ];
 
 // Establish connection with database pool 
-
 // Middleware for parsing JSON
 app.use(express.json());
 
@@ -80,17 +68,22 @@ app.use(express.json());
     Sample user body:
         email: jdoe67@scu.edu
         password: 676767
-        name: Jane Doe
-        pfp: insert url
-        bio: blah blah blah im so epic
 */
 app.post('/api/createuser', (req, res) =>{
-    // keeping all fields required for now
-    const { email,  password, name, pfp, bio} = req.body;
-    if(!email || !name|| !pfp || !bio || !password){
-        console.log('[API] email, password, name, profile picture, or biography is missing');
+    const { email,  password} = req.body;
+    if(!email || !password){
+        console.log('[API] email or password is missing');
         return res.status(400).json({
-            error: 'Email, password, name, profile picture, or biography is missing'
+            error: 'Email or password is missing'
+        });
+    }
+    // find if user email already exists
+    // if so, stop account creation
+    const validUser = mockUsersData.find(data => data.email === email);
+    if(validUser){
+        console.log('[API] User already exists. ');
+         return res.status(401).json({
+            error: 'User already exists in the system. Please login.'
         });
     }
     // add all of the fields to the db
@@ -98,9 +91,6 @@ app.post('/api/createuser', (req, res) =>{
     const newUser = {
         email: email,
         password: password,
-        name: name,
-        pfp: pfp,
-        bio: bio
     };
     mockUsersData.push(newUser);
     console.log(`[API] Successfully created new user: ${newUser.name}`);
@@ -134,13 +124,9 @@ app.post('/api/login', (req, res) => {
         });
     }
     console.log(`[API] User successfuly found: ${validUser.email}`);
-    // If frontend team needs a specific token to be 
     res.status(201).json({
         message: 'User found successfully',
-        email: validUser.email,
-        name: validUser.name,
-        pfp: validUser.pfp,
-        bio: validUser.bio
+        email: validUser.email
     });
 });
 
