@@ -171,7 +171,7 @@ app.post('/api/createlisting', (req, res) => {
     });
 })
 
-// GET/FETCH - Retrieve listing data
+// GET/FETCH - Retrieve all listing data
 app.get('/api/getlistings', (req, res) => {
     // get all listing data from db
     // loop to parse everything into an array
@@ -180,6 +180,25 @@ app.get('/api/getlistings', (req, res) => {
     const listings = mockListingsData;
     console.log(`[API] Serving ${listings.length} listings.`);
     res.status(200).json(listings);
+});
+
+// GET/FETCH - Retrieve singular listing data
+app.get('/api/getlistings/:id', (req, res) => {
+    const id = req.params.id;
+   if(!id){
+        console.log('[API] Missing id');
+        return res.status(400).json({
+            error: 'Missing id'
+        });
+    }
+    const foundListing = mockListingsData.find(mockListingsData => mockListingsData.id === id);
+    if(!foundListing){
+        console.log('[API] Listing not found/does not exist');
+        return res.status(400).json({
+            error: 'Listing does not exist'
+        });
+    }
+   res.status(200).json(foundListing);
 });
 
 // DELETE - Delete specific listing

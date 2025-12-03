@@ -29,6 +29,26 @@ export default function ListingDetailPage({userEmail}) {
     //checking to see if contact button was clicked to show email
     const [isEmailShown, setEmailShown] = useState(false);
 
+    useEffect(() => {
+        if (id) {
+            async function fetchListingDetails() {
+                try {
+                    const response = await fetch(`/api/getlistings/${id}`); 
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    } 
+                    const listingData = await response.json();
+                    setListing(listingData); 
+
+                } catch (error) {
+                    console.error("Could not fetch listing details:", error);
+                    setListing(null); // Clear listing on error
+                }
+            }
+            fetchListingDetails();
+        }
+    }, [id]); 
+
     function ContactClick() {
         window.location.href = `mailto:${listing.email}?subject=Interested in ${listing.title}`;
         setEmailShown(true);
