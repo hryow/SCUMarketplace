@@ -18,6 +18,11 @@ export default function LoginPage({ setUserEmail }) {
 
     async function createAccount(){
         try {
+            const checkEmail = email.slice(-8);
+            if(checkEmail != "@scu.edu"){
+                setErrorMsg('Sign Up Failed. Please use an @scu.edu email account');
+                return false;
+            }
             const response = await fetch('/api/createuser', {
                 method: 'POST',
                 headers: {
@@ -70,7 +75,6 @@ export default function LoginPage({ setUserEmail }) {
             let success = false;
             if (loginMode) {
                 success = await login();
-
                 if (success) {
                     console.log('Login successful!');
                     setUserEmail(email);
