@@ -116,3 +116,7 @@
   min-height: 150px;
   resize: vertical;
 }
+
+label {
+  color: black;
+}

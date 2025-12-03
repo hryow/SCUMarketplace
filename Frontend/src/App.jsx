@@ -11,7 +11,6 @@ import CreateListingPage from './components/CreateListingPage.jsx';
 function App() {
 
   const [userEmail, setUserEmail] = useState("");
-  const testEmail = "testingemail@scu.edu";
 
   return (
     <div> 

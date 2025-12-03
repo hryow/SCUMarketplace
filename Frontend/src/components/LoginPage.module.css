@@ -15,6 +15,7 @@
     font-size: xx-large;
     margin: 2rem 0;
     font-weight: 500;
+    color: black;
 }
 
 .form, .expandableFields {
@@ -38,6 +39,7 @@ textarea.field {
 .newUser {
     align-self: flex-end;
     padding-right: 0.2rem;
+    color: black;
 }
 
 .link {

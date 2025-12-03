@@ -4,18 +4,6 @@ import { Link, useParams, useLocation } from 'react-router-dom';
 
 import Header from './Header.jsx'
 
-//fake data for testing/styling
-/*
-        const mockData = {
-            title: "Among Us Nugget",
-            price: 67,
-            location: "Swig Hall!",
-            description: "Super rare nugget like an among us imposter from the imposter",
-            email: "sellersemail@scu.edu",
-            photo: "/amongNugget.jpg"  
-        };
-            setListing(mockData);
-*/
 
 export default function ListingDetailPage({userEmail}) {
     //id is whatever will be used to differentiate listings
