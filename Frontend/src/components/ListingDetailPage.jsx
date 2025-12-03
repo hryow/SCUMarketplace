@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styles from './ListingDetailPage.module.css';
 import { Link, useParams, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import Header from './Header.jsx'
 
@@ -71,7 +72,12 @@ export default function ListingDetailPage({userEmail}) {
     }
 
     if (!listing) {
-        return <div> Loading Listing... </div>;
+        return (
+            <>
+                <Header userEmail={userEmail}/>
+                <div> Loading Listing... </div>;
+            </>
+        );
     }
 
     const isOwner = userEmail === listing.email;
@@ -98,36 +104,40 @@ export default function ListingDetailPage({userEmail}) {
     return (
         <>
             <Header userEmail={userEmail}/>
-            <div className={styles.pageContainer}>
-                <Link to="/Gallery" className = {styles.backButton}>
-                &lt; Back
-                </Link>
-                
-                <div className={styles.content}>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                style={{ width: '100%', height: '100%' }}
+            >
+                <div className={styles.pageContainer}>
+                    <Link to="/Gallery" className = {styles.backButton}>
+                    &lt; Back
+                    </Link>
+                    
+                    <div className={styles.content}>
 
-                    <div className={styles.image}>
-                    <img src={listing.photo} alt = {listing.title} className={styles.listingImage} />
-                    </div>
-
-
-                    <div className={styles.rightSide}>
-                        <h1 className={styles.title}> {listing.title} </h1>
-
-                        <div className={styles.listingInformation}>
-                            <span className={styles.price}> ${listing.price} </span>
-                            <span className={styles.location}> {listing.location} </span>
+                        <div className={styles.image}>
+                        <img src={listing.photo} alt = {listing.title} className={styles.listingImage} />
                         </div>
-                    
-                    <p className={styles.lstingDesc}> {listing.description} </p>
 
-                    {contactSection}
-                    
+
+                        <div className={styles.rightSide}>
+                            <h1 className={styles.title}> {listing.title} </h1>
+
+                            <div className={styles.listingInformation}>
+                                <span className={styles.price}> ${listing.price} </span>
+                                <span className={styles.location}> {listing.location} </span>
+                            </div>
+                        
+                            <p className={styles.lstingDesc}> {listing.description} </p>
+
+                            {contactSection}
+                        </div>
                     </div>
-
-
                 </div>
-
-            </div>
+            </motion.div>
         </>
     );
 }
