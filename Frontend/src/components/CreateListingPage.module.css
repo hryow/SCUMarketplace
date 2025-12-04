@@ -7,20 +7,17 @@
 }
 
 .backButton {
-  background-color: #A32035;
-  color: white;
+  color: #758592;
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
   border: none;
-  border-radius: 5px;
-  padding: 0.75rem 1rem;
   cursor: pointer;
+  border-radius: 8px;
 }
 
 .backButton:hover {
-  background-color: #862633;
-  color: white;
+  color: #5c6974;
+  text-decoration: underline;
 }
 
 
@@ -54,9 +51,10 @@
   align-items: center;
   border: 1px solid #EFECE9;
   border-radius: 8px;
-  min-height: 400px;
-  color: #888;
+  height: 585px;
+  color: #696969;
   background-color: #f9f9f9;
+  border-color: #c6c6c6;
   cursor: pointer;
   overflow: hidden;
   position: relative;
@@ -67,8 +65,15 @@
   border-color: #aaa;
 }
 
+.addImageText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.67rem;
+}
+
 .plusSign {
-  font-size: 4rem;
+  font-size: 3em;
   font-weight: 200;
   line-height: 1;
 }
@@ -115,6 +120,7 @@
 .textArea {
   min-height: 150px;
   resize: vertical;
+  font-family: inherit;
 }
 
 label {
