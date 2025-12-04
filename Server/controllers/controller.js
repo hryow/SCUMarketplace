@@ -1,5 +1,5 @@
 // Importing the PostgreSQL connection from db folder to run the queries
-const connection = require('../db/connection');
+const pool = require('../db/connection');
 
 // Creating a new user
 exports.createUser = async (req, res) => {
