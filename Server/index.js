@@ -286,7 +286,7 @@ app.post('/api/createlisting', async (req, res) => {
 // GET/FETCH - Retrieve singular listing data
 app.get('/api/getlistings/:id', async (req, res) => {
 // Need to get listing ID from the URL parameter
-const id = req.params.id;
+const id = parseInt(req.params.id);
     try {
         
         // Fetching all of the new listings sorted by newest
@@ -335,7 +335,7 @@ const id = req.params.id;
 // Since professor is wondering what happens when a listing is sold
 app.delete('/api/deletelisting/:id', async (req, res) => {
     // Getting the listing ID from the URL parameter
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
     try {
         // Delete the listing and return the deleted row
         const query = 'DELETE FROM listings WHERE id = $1 RETURNING *'; 
