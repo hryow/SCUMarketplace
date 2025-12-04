@@ -1,5 +1,6 @@
 const express = require('express');
-const { db } = require('pg');
+//Postgres connection
+const pool = require('./connection');
 
 const app = express();
 const port = 8080;
