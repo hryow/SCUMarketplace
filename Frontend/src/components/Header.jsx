@@ -9,7 +9,7 @@ export default function Header({ userEmail }){
             <Link to="/Gallery" className={styles.logo}>
                 <img src={logo} alt="logo" className={styles.logoImage} />
             </Link>
-            <div className={styles.welcome}>Welcome, {userEmail}!</div>
+            <div className={styles.welcome}>welcome, {userEmail}!</div>
             <Link to="/listing" className={styles.addListingButton}>
                 <div className={styles.plus}>+</div>
                 <div>sell something</div>
