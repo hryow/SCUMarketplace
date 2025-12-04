@@ -257,17 +257,28 @@ app.get('/api/getlistings', (req, res) => {
 
 // GET/FETCH - Retrieve singular listing data
 app.get('/api/getlistings/:id', async (req, res) => {
-
+// Need to get listing ID from the URL parameter
+const id = req.params.id;
     try {
+        // The query for listing by the ID
+        const query = 'SELECT * FROM listings WHERE id = $1';
+        const listings = await pool.query(query, [id]);
+
+        /*
         // Fetching all of the new listings sorted by newest
         const query = 'SELECT * FROM listings ORDER BY created_at DESC'; 
         const listings = (await pool.query(query)).rows;
+        */
 
-        res.status(200).json(listings);
+        if (listings.rows.length === 0) return res.status(404).json({ error: 'The listing is not found' });
+        // Return the listing if it is found
+        res.status(200).json(listings.rows[0]); 
+        //res.status(200).json(listings);
+        
     } catch (err) {
         console.error(err);
          // for any other error, we return the 500 Internal Server Error
-        res.status(500).json({ error: 'Database error fetching listings' });
+        res.status(500).json({ error: 'There is a database error fetching the listings' });
     }
 });
     const id = req.params.id;
