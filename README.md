@@ -1,6 +1,9 @@
 # SCUMarketplace
 SCUMarketplace is a web application hosting a marketplace for Santa Clara University students. Users can browse, buy, and sell items in a secure and convenient online environment.
 
+## Authors
+Alyce Wu, Hayoung Ryow, Kelvin Rout, Thai Nguyen, Trisha Ganesh 
+
 ## Table of Contents 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
@@ -90,3 +93,4 @@ Project documentation is organized in the [`/doc`](/doc) folder:
 - [Implementation Plan](./doc/ImplementationPlan.md) - Project timeline and milestones
 - [System Requirements](./doc/SystemRequirements.pdf) - System requirements
 - [Testing Documentation](./doc/TestingGuide.md) - Testing guidelines
+  
