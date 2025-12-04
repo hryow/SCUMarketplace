@@ -140,6 +140,7 @@ app.post('/api/createuser', async (req, res) =>{
 // POST - Check if user credentials are valid
 app.post('/api/login', async (req, res) => {
     const {email, password} = req.body;
+    
     //validating the required fields
     if(!email || !password){
         console.log('[API] email or password is missing');
@@ -153,13 +154,24 @@ app.post('/api/login', async (req, res) => {
         const query = 'SELECT * FROM users WHERE email = $1'; 
         const result = await pool.query(query, [email]);
 
-        if (result.rows.length === 0) return res.status(401).json({ error: 'User is not found!' });
+        if (result.rows.length === 0) {
+            return res.status(401).json({ 
+                error: 'User is not found!' 
+            });
+        }
         const user = result.rows[0];
 
         //we compare the password from the request with the stored password
-        if (user.password !== password) return res.status(401).json({ error: 'This is the incorrect password' });
+        if (user.password !== password) {
+            return res.status(401).json({ error: 'This is the incorrect password' });
+        }
+         
         //the login is successful
-        res.status(200).json({ message: 'The login is successful', user });
+        res.status(200).json({ 
+            message: 'The login is successful', 
+            user
+        });
+         
     } catch (err) {
         console.error(err);
          // for any other error, we return the 500 Internal Server Error
