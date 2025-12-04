@@ -194,7 +194,7 @@ app.post('/api/login', async (req, res) => {
         photo: insert url(s)
         location: Swig
 */
-app.post('/api/createlisting', (req, res) => {
+app.post('/api/createlisting', async (req, res) => {
     const { title, price, description, photo, location, email } = req.body;
     if(!title || !price || !description || !photo || !location || !email){
         console.log('[API] Title, price, description, photo, location, or email is missing');
@@ -202,6 +202,24 @@ app.post('/api/createlisting', (req, res) => {
             error: 'Title, price, description, photo, location, or email is missing'
         });
     }
+
+    try {
+        const query = `
+            INSERT INTO listings (title, price, description, photo, location, email)
+            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
+        `;
+        const values = [title, price, description, photo, location, email];
+
+        //executing the query to insert a new listing
+        const newListing = (await pool.query(query, values)).rows[0];
+
+        //returning the newly created listing
+        res.status(201).json({ message: 'The listing is created successfully', listing: newListing });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'There is a database error creating the listing' });
+    }
+});
     // something something to generate a lid
     // add new listing to the db
     // return a response (on success and for any errors);
