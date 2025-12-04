@@ -28,6 +28,8 @@
   padding: 0.75rem 1rem;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin: auto 0 0 0;
+  justify-self: flex-end;
 }
 .buyButton:hover {
   background-color: #862633;
@@ -42,7 +44,10 @@
 }
 
 .image {
-  flex: 1;
+  display: flex;
+  overflow: hidden;
+  flex: 0 0 50%;
+  max-width: 50%;
 }
 
 .listingImage {
@@ -56,6 +61,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .title {
@@ -63,11 +69,15 @@
   font-weight: 700;
   margin: 0;
   color: black;
+  word-wrap: break-word;  
+  overflow-wrap: break-word;
 }
 
 .listingInformation {
-  display: inline-flex;
-  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  align-items: baseline;
   margin: 0.5rem 0 1rem 0;
 }
 
@@ -80,12 +90,16 @@
 .location {
   font-size: 2rem;
   color: #404040;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .lstingDesc {
   font-size: 1rem;
   color: #777;
   margin-bottom: 2rem;
+  word-wrap: break-word;  
+  overflow-wrap: break-word;
 }
 
 
@@ -94,4 +108,5 @@
   text-align: right;
   font-size: 0.9rem;
   color: #777;
+  margin-top: auto;
 }
