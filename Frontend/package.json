@@ -12,8 +12,7 @@
     "test:coverage": "vitest --coverage",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "cypress:headed": "cypress run --headed",
-    "e2e": "cypress run"
+    "test: e2e": "start-server-and-test dev http://localhost:5173 cypress:open"
   },
   "dependencies": {
     "framer-motion": "^12.23.24",
