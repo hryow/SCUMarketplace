@@ -217,6 +217,7 @@ app.post('/api/createlisting', async (req, res) => {
         res.status(201).json({ message: 'The listing is created successfully', listing: newListing });
     } catch (err) {
         console.error(err);
+         // for any other error, we return the 500 Internal Server Error
         res.status(500).json({ error: 'There is a database error creating the listing' });
     }
 });
@@ -255,7 +256,20 @@ app.get('/api/getlistings', (req, res) => {
 });
 
 // GET/FETCH - Retrieve singular listing data
-app.get('/api/getlistings/:id', (req, res) => {
+app.get('/api/getlistings/:id', async (req, res) => {
+
+    try {
+        // Fetching all of the new listings sorted by newest
+        const query = 'SELECT * FROM listings ORDER BY created_at DESC'; 
+        const listings = (await pool.query(query)).rows;
+
+        res.status(200).json(listings);
+    } catch (err) {
+        console.error(err);
+         // for any other error, we return the 500 Internal Server Error
+        res.status(500).json({ error: 'Database error fetching listings' });
+    }
+});
     const id = req.params.id;
    if(!id){
         console.log('[API] Missing id');
