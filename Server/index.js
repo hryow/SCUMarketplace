@@ -133,14 +133,25 @@ app.post('/api/createuser', async (req, res) =>{
 });
 
 // POST - Check if user credentials are valid
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async (req, res) => {
     const {email, password} = req.body;
+    //validating the required fields
     if(!email || !password){
         console.log('[API] email or password is missing');
         return res.status(400).json({
             error: 'Email or password is missing'
         });
     }
+
+     try {
+        // A SQL query to find the user by email
+        const query = 'SELECT * FROM users WHERE email = $1'; 
+        const result = await pool.query(query, [email]);
+
+        if (result.rows.length === 0) return res.status(401).json({ error: 'User not found' });
+
+        const user = result.rows[0];
+         
     // FOR TESTING 
     // Since emails are unique, we're able to search for the singular valid user using only email and password
     const validUser = mockUsersData.find(data => data.email === email);
