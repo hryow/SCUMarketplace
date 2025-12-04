@@ -106,10 +106,10 @@ app.post('/api/createuser', async (req, res) =>{
         console.error(err);
         //checking for any unique constraint violation (i.e. if an email already exists)
         if (err.code === '23505') { // the PostgreSQL error code for unique violation
-            res.status(400).json({ error: 'The user already exists' });
+            return res.status(400).json({ error: 'The user already exists' });
         } 
         // for any other error, we return the 500 Internal Server Error
-        res.status(500).json({ error: 'There is a database error creating the user' });
+        return res.status(500).json({ error: 'There is a database error creating the user' });
     }
 });
 
