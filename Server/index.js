@@ -301,7 +301,22 @@ const id = req.params.id;
 // DELETE - Delete specific listing
 // Implement if needed. Otherwise disregard.
 // Since professor is wondering what happens when a listing is sold
-app.delete('api/deletelisting/:id', (req, res) => {
+app.delete('api/deletelisting/:id', async (req, res) => {
+    // Getting the listing ID from the URL parameter
+    try {
+        // Delete the listing and return the deleted row
+        const query = 'DELETE FROM listings WHERE id = $1 RETURNING *'; 
+        const result = await pool.query(query, [id]);
+
+        if (result.rows.length === 0) return res.status(404).json({ error: 'The listing is not found' });
+
+        res.status(200).json({ message: 'The listing is deleted', listing: result.rows[0] });
+    } catch (err) {
+        console.error(err);
+        // for any other error, we return the 500 Internal Server Error
+        res.status(500).json({ error: 'There is a database error deleting the listing' });
+    }
+});
     const id = req.params.id;
     if(!id){
         console.log('[API] Missing id');
