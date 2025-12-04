@@ -155,7 +155,12 @@ app.post('/api/login', async (req, res) => {
         if (user.password !== password) return res.status(401).json({ error: 'This is the incorrect password' });
         //the login is successful
         res.status(200).json({ message: 'The login is successful', user });
-
+    } catch (err) {
+        console.error(err);
+         // for any other error, we return the 500 Internal Server Error
+        res.status(500).json({ error: 'There was a database error during login' });
+    }
+});
          
     // FOR TESTING 
     // Since emails are unique, we're able to search for the singular valid user using only email and password
