@@ -10,7 +10,7 @@ exports.createUser = async (req, res) => {
   if (!email || !password) {
     // Return a 400 Bad Request if any of the fields are missing
     return res.status(400).json({ 
-      error: 'Email, password, name, profile picture, or biography is missing and not there' 
+      error: 'Email or password is missing and not there' 
     });
   }
 
@@ -27,7 +27,7 @@ exports.createUser = async (req, res) => {
     const newUser = (await pool.query(query, values)).rows[0];
 
     // Logging the success to server console
-    console.log(`[API] Successfully created new user: ${newUser.name}`);
+    console.log(`[API] Successfully created new user: ${newUser.email}`);
 
     // Sending the success response with the user data
     res.status(201).json({
@@ -63,7 +63,7 @@ exports.login = async (req, res) => {
 
     // If the user not found, return 401 Unauthorized
     if (result.rows.length === 0) {
-      console.log('[API] The user does not exist/invalid email');
+      //console.log('[API] The user does not exist/invalid email');
       return res.status(401).json({ error: 'Invalid user info. Create an account please.' });
     }
 
@@ -72,20 +72,17 @@ exports.login = async (req, res) => {
 
     // Checking the password
     if (validUser.password !== password) {
-      console.log(`[API] Invalid password for user: ${email}`);
-      return res.status(401).json({ error: 'Invalid user info. Please create an account.' });
+      //console.log(`[API] Invalid password for user: ${email}`);
+      return res.status(401).json({ error: 'Incorrect password.' });
     }
 
     // Logging the successful login
     console.log(`[API] User successfully found: ${validUser.email}`);
 
     // Sending a success response with user info
-    res.status(201).json({
+    res.status(200).json({
       message: 'User found successfully',
       email: validUser.email,
-      name: validUser.name,
-      pfp: validUser.pfp,
-      bio: validUser.bio
     });
   } catch (err) {
     // Logging the error and return 500 if the query fails
