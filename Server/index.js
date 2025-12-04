@@ -273,42 +273,45 @@ app.post('/api/createlisting', async (req, res) => {
 })
 */
 // GET/FETCH - Retrieve all listing data
-app.get('/api/getlistings', (req, res) => {
     // get all listing data from db
     // loop to parse everything into an array
-
+/*
     // TEST FROM MOCK DB
     const listings = mockListingsData;
     console.log(`[API] Serving ${listings.length} listings.`);
     res.status(200).json(listings);
 });
+*/
 
 // GET/FETCH - Retrieve singular listing data
 app.get('/api/getlistings/:id', async (req, res) => {
 // Need to get listing ID from the URL parameter
 const id = req.params.id;
     try {
-        // The query for listing by the ID
-        const query = 'SELECT * FROM listings WHERE id = $1';
-        const listings = await pool.query(query, [id]);
-
-        /*
+        
         // Fetching all of the new listings sorted by newest
         const query = 'SELECT * FROM listings ORDER BY created_at DESC'; 
         const listings = (await pool.query(query)).rows;
-        */
 
-        if (listings.rows.length === 0) return res.status(404).json({ error: 'The listing is not found' });
+        if (listings.rows.length === 0) {
+            return res.status(404).json({ 
+                error: 'The listing is not found' 
+            });
+        }
+        
         // Return the listing if it is found
-        res.status(200).json(listings.rows[0]); 
-        //res.status(200).json(listings);
+        res.status(200).json(listings);
         
     } catch (err) {
         console.error(err);
          // for any other error, we return the 500 Internal Server Error
-        res.status(500).json({ error: 'There is a database error fetching the listings' });
+        res.status(500).json({ 
+            error: 'There is a database error fetching the listings' 
+        });
     }
 });
+
+/*
     const id = req.params.id;
    if(!id){
         console.log('[API] Missing id');
@@ -325,6 +328,7 @@ const id = req.params.id;
     }
    res.status(200).json(foundListing);
 });
+*/
 
 // DELETE - Delete specific listing
 // Implement if needed. Otherwise disregard.
