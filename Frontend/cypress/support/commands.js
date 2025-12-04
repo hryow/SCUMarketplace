@@ -1,25 +1,22 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+// Custom login command for reusability
+Cypress.Commands.add('login', (email, password) => {
+  cy.visit('/login')
+  cy.get('input[placeholder="email@scu.edu"]').type(email)
+  cy.get('input[placeholder="password"]').type(password)
+  cy.get('button[type="submit"]').contains('Log In').click()
+  cy.url().should('include', '/Gallery')
+})
+
+// Custom command to create a listing
+Cypress.Commands.add('createListing', (listingData) => {
+  cy.get('a[href="/CreateListing"]').click()
+  cy.get('input[placeholder*="listing name"]').type(listingData.title)
+  cy.get('input[placeholder*="price"]').type(listingData.price)
+  cy.get('input[placeholder*="location"]').type(listingData.location)
+  cy.get('textarea').type(listingData.description)
+  
+  // Handle image upload
+  cy.get('input[type="file"]').selectFile(listingData.imagePath)
+  
+  cy.get('button[type="submit"]').click()
+})

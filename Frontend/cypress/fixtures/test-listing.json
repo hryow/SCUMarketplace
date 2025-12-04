@@ -1,0 +1,7 @@
+{
+  "title": "MacBook Pro 2020",
+  "price": "1200",
+  "description": "Great condition, 16GB RAM, 512GB SSD",
+  "location": "Dunne Hall",
+  "imagePath": "cypress/fixtures/test-image.jpg"
+}
