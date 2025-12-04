@@ -16,7 +16,11 @@ exports.createUser = async (req, res) => {
 
   try {
     // a SQL query to insert a new user into the 'users' table
-    const query = `INSERT INTO users (email, password) VALUES ($1,$2) RETURNING *;`;
+    const query = `
+      INSERT INTO users (email, password)
+      VALUES ($1, $2)
+      RETURNING *;
+    `;
     const values = [email, password];
 
     // Executing the query and getting the inserted user
@@ -30,15 +34,17 @@ exports.createUser = async (req, res) => {
       message: 'The user is created successfully',
       email: newUser.email
     });
+    
   } catch (err) {
     // Logging the error and returning a 500 Internal Server Error if database query fails
     console.error(err);
     
     //constraint 
     if (err.code === '23505') { 
-      return res.status(400).json({ error: 'The user already exists' });
+      return res.status(400).json({ 
+        error: 'The user already exists' 
+      });
     }
-    
     res.status(500).json({ error: 'Database error creating user' });
   }
 };
