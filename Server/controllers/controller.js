@@ -83,9 +83,6 @@ exports.login = async (req, res) => {
     res.status(201).json({
       message: 'User found successfully',
       email: validUser.email,
-      name: validUser.name,
-      pfp: validUser.pfp,
-      bio: validUser.bio
     });
   } catch (err) {
     // Logging the error and return 500 if the query fails
