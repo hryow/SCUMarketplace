@@ -94,18 +94,18 @@ exports.login = async (req, res) => {
 
 // Create the new listing
 exports.createListing = async (req, res) => {
-  // Extract listing data from request body
-  const { title, price, description, photo, location, email } = req.body;
+  const { title, price, description, location, email } = req.body;
+  const imagePath = req.file ? req.file.filename : null; 
 
-  // Validating the required fields
-  if (!title || !price || !description || !photo || !location || !email) {
-    return res.status(400).json({ error: 'Title, price, description, photo, location, or email is missing' });
+  // Validating the required fields (including the file)
+  if (!title || !price || !description || !location || !email || !imagePath) {
+    return res.status(400).json({ error: 'Missing required field or image file.' });
   }
 
   try {
     // A SQL query to insert a new listing
     const query = `INSERT INTO listings (title, price, description, photo, location, email) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *;`;
-    const values = [title, price, description, photo, location, email];
+    const values = [title, price, description, imagePath, location, email];
 
     // Executing the query and get the new listing
     const newListing = (await pool.query(query, values)).rows[0];
@@ -120,7 +120,7 @@ exports.createListing = async (req, res) => {
       title: newListing.title,
       price: newListing.price,
       description: newListing.description,
-      photo: newListing.photo,
+      photo: imagePath,
       location: newListing.location,
       email: newListing.email
     });
@@ -146,5 +146,48 @@ exports.getListings = async (req, res) => {
     // Logging the error and return 500 if query fails
     console.error(err);
     res.status(500).json({ error: 'Database error fetching listings' });
+  }
+};
+
+// Get singular listing for viewing
+exports.getSingleListing = async (req, res) => {
+  // Get the id from the URL parameters
+  const { id } = req.params; 
+  
+  try {
+    // Query to get the listing with a matching id
+    const result = await pool.query('SELECT * FROM listings WHERE id = $1', [id]);
+    const listing = result.rows[0];
+
+    if (!listing) {
+        return res.status(404).json({ error: 'Listing not found' });
+    }
+    console.log(`[API] Serving listing ID: ${id}.`);
+    res.status(200).json(listing);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error fetching listing' });
+  }
+};
+
+// Delete listing
+exports.deleteListing = async (req, res) => {
+  // Get the id from the URL parameters
+  const { id } = req.params; 
+
+  try {
+    // Query to delete the listing with a matching id
+    const result = await pool.query('DELETE FROM listings WHERE id = $1 RETURNING *', [id]);
+    
+    if (result.rowCount === 0) {
+        return res.status(404).json({ error: 'Listing not found or already deleted' });
+    }
+    console.log(`[API] Deleted listing ID: ${id}.`);
+    res.status(200).json({ message: 'Listing successfully deleted', deletedListing: result.rows[0] });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error during deletion' });
   }
 };

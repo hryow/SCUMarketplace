@@ -1,12 +1,13 @@
 import React, { useState, useEffect} from 'react';
 import styles from './ListingDetailPage.module.css';
-import { Link, useParams, useLocation } from 'react-router-dom';
+import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import Header from './Header.jsx'
 
 export default function ListingDetailPage({userEmail}) {
     const { id } = useParams();
+    const navigate = useNavigate();
     const location = useLocation();
     const data = location.state?.listing;
     const [listing, setListing] = useState(data || null);
@@ -73,10 +74,7 @@ export default function ListingDetailPage({userEmail}) {
             </>
         );
     }
-    
-    // --- CONSTRUCT THE IMAGE URL ---
-    // The 'listing.photo' field holds the filename (e.g., 'photo-12345.jpg')
-    // We prefix it with the static URL defined in your Express server ('/images')
+
     const imageUrl = `http://localhost:8080/images/${listing.photo}`;
 
     const isOwner = userEmail === listing.email;
