@@ -333,7 +333,7 @@ const id = req.params.id;
 // DELETE - Delete specific listing
 // Implement if needed. Otherwise disregard.
 // Since professor is wondering what happens when a listing is sold
-app.delete('api/deletelisting/:id', async (req, res) => {
+app.delete('/api/deletelisting/:id', async (req, res) => {
     // Getting the listing ID from the URL parameter
     const id = req.params.id;
     try {
