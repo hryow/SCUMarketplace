@@ -175,7 +175,7 @@ app.post('/api/login', async (req, res) => {
     } catch (err) {
         console.error(err);
          // for any other error, we return the 500 Internal Server Error
-        res.status(500).json({ error: 'There was a database error during login' });
+        return res.status(500).json({ error: 'There was a database error during login' });
     }
 });
 
@@ -242,7 +242,7 @@ app.post('/api/createlisting', async (req, res) => {
     } catch (err) {
         console.error(err);
          // for any other error, we return the 500 Internal Server Error
-        res.status(500).json({ 
+        return res.status(500).json({ 
             error: 'There is a database error creating the listing' 
         });
     }
