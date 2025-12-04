@@ -81,13 +81,23 @@ app.post('/api/createuser', async (req, res) =>{
     }
 
     try {
-        // a SQL query for inserting a new user into the 'users' table
-        // $1 and $2 are placeholders for the parameterized queries to prevent injection (SQL injection)
-        //$1 will replace the first value in the argument, and etc.
+        /* a SQL query for inserting a new user into the 'users' table
+        $1 and $2 are placeholders for the parameterized queries to prevent injection (SQL injection)
+        $1 will replace the first value in the argument, and etc. */
         const query = `
             INSERT INTO users (email, password)
             VALUES ($1, $2) RETURNING *;
         `;
+
+        // the array of values in order to substitute into the placeholders in the query
+        const values = [email, password];
+        //executing the query using the connection pool
+        const newUser = (await pool.query(query, values)).rows[0];
+
+        // Respond with 201 Created and return the newly created user
+        res.status(201).json({ message: 'The user is created successfully', user: newUser });
+
+        
     // find if user email already exists
     // if so, stop account creation
     const validUser = mockUsersData.find(data => data.email === email);
