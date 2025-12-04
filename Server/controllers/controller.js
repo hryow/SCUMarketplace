@@ -4,18 +4,20 @@ const pool = require('../db/connection');
 // Creating a new user
 exports.createUser = async (req, res) => {
   // Extracting the user data from the request body
-  const { email, password, name, pfp, bio } = req.body;
+  const { email, password } = req.body;
 
   // Validating the required fields
-  if (!email || !password || !name || !pfp || !bio) {
+  if (!email || !password) {
     // Return a 400 Bad Request if any of the fields are missing
-    return res.status(400).json({ error: 'Email, password, name, profile picture, or biography is missing and not there' });
+    return res.status(400).json({ 
+      error: 'Email, password, name, profile picture, or biography is missing and not there' 
+    });
   }
 
   try {
     // a SQL query to insert a new user into the 'users' table
-    const query = `INSERT INTO users (email, password, name, pfp, bio) VALUES ($1,$2,$3,$4,$5) RETURNING *;`;
-    const values = [email, password, name, pfp, bio];
+    const query = `INSERT INTO users (email, password) VALUES ($1,$2) RETURNING *;`;
+    const values = [email, password];
 
     // Executing the query and getting the inserted user
     const newUser = (await pool.query(query, values)).rows[0];
