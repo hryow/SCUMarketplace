@@ -97,7 +97,9 @@ app.post('/api/createuser', async (req, res) =>{
         // Respond with 201 Created and return the newly created user
         res.status(201).json({ message: 'The user is created successfully', user: newUser });
 
-        
+    } catch (err) {
+        //logging errors to the server console to debug anything
+        console.error(err);
     // find if user email already exists
     // if so, stop account creation
     const validUser = mockUsersData.find(data => data.email === email);
