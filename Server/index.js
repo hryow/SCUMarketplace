@@ -335,20 +335,32 @@ const id = req.params.id;
 // Since professor is wondering what happens when a listing is sold
 app.delete('api/deletelisting/:id', async (req, res) => {
     // Getting the listing ID from the URL parameter
+    const id = req.params.id;
     try {
         // Delete the listing and return the deleted row
         const query = 'DELETE FROM listings WHERE id = $1 RETURNING *'; 
-        const result = await pool.query(query, [id]);
+        const listings = await pool.query(query, [id]);
 
-        if (result.rows.length === 0) return res.status(404).json({ error: 'The listing is not found' });
-
-        res.status(200).json({ message: 'The listing is deleted', listing: result.rows[0] });
+        if (listings.rows.length === 0) {
+            return res.status(404).json({ 
+                error: 'The listing is not found' 
+            });
+        }
+        
+        res.status(200).json({ 
+            message: 'The listing is deleted', 
+            listing: listings.rows[0] 
+        });
+        
     } catch (err) {
         console.error(err);
         // for any other error, we return the 500 Internal Server Error
-        res.status(500).json({ error: 'There is a database error deleting the listing' });
+        res.status(500).json({ 
+            error: 'There is a database error deleting the listing' 
+        });
     }
 });
+/*
     const id = req.params.id;
     if(!id){
         console.log('[API] Missing id');
@@ -373,7 +385,7 @@ app.delete('api/deletelisting/:id', async (req, res) => {
     console.log(mockListingsData); // show changes
     return res.status(204).end();
 });
-
+*/
 // Simple verification route for testing
 app.get('/api/health', (req, res) => {
     res.json({ status: 'Server is running!' });
@@ -381,4 +393,4 @@ app.get('/api/health', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
-})
+});
