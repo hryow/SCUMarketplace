@@ -178,7 +178,8 @@ app.post('/api/login', async (req, res) => {
         res.status(500).json({ error: 'There was a database error during login' });
     }
 });
-         
+
+/*
     // FOR TESTING 
     // Since emails are unique, we're able to search for the singular valid user using only email and password
     const validUser = mockUsersData.find(data => data.email === email);
@@ -211,8 +212,10 @@ app.post('/api/login', async (req, res) => {
         photo: insert url(s)
         location: Swig
 */
+
 app.post('/api/createlisting', async (req, res) => {
     const { title, price, description, photo, location, email } = req.body;
+    
     if(!title || !price || !description || !photo || !location || !email){
         console.log('[API] Title, price, description, photo, location, or email is missing');
         return res.status(400).json({
@@ -223,7 +226,8 @@ app.post('/api/createlisting', async (req, res) => {
     try {
         const query = `
             INSERT INTO listings (title, price, description, photo, location, email)
-            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
+            VALUES ($1, $2, $3, $4, $5, $6) 
+            RETURNING *;
         `;
         const values = [title, price, description, photo, location, email];
 
@@ -231,13 +235,20 @@ app.post('/api/createlisting', async (req, res) => {
         const newListing = (await pool.query(query, values)).rows[0];
 
         //returning the newly created listing
-        res.status(201).json({ message: 'The listing is created successfully', listing: newListing });
+        res.status(201).json({ 
+            message: 'The listing is created successfully', 
+            listing: newListing 
+        });
     } catch (err) {
         console.error(err);
          // for any other error, we return the 500 Internal Server Error
-        res.status(500).json({ error: 'There is a database error creating the listing' });
+        res.status(500).json({ 
+            error: 'There is a database error creating the listing' 
+        });
     }
 });
+
+/*
     // something something to generate a lid
     // add new listing to the db
     // return a response (on success and for any errors);
@@ -260,7 +271,7 @@ app.post('/api/createlisting', async (req, res) => {
         message: 'Listing created successfully',
     });
 })
-
+*/
 // GET/FETCH - Retrieve all listing data
 app.get('/api/getlistings', (req, res) => {
     // get all listing data from db
