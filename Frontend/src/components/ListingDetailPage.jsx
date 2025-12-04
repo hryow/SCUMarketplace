@@ -1,21 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import styles from './ListingDetailPage.module.css';
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import Header from './Header.jsx'
 
-
 export default function ListingDetailPage({userEmail}) {
-    //id is whatever will be used to differentiate listings
     const { id } = useParams();
-
-    // get listing data from ListingCard
     const location = useLocation();
     const data = location.state?.listing;
     const [listing, setListing] = useState(data || null);
-
-    //checking to see if contact button was clicked to show email
     const [isEmailShown, setEmailShown] = useState(false);
 
     useEffect(() => {
@@ -31,42 +25,42 @@ export default function ListingDetailPage({userEmail}) {
 
                 } catch (error) {
                     console.error("Could not fetch listing details:", error);
-                    setListing(null); // Clear listing on error
+                    setListing(null);
                 }
             }
-            fetchListingDetails();
+            // Only fetch if data wasn't passed via location.state (e.g., direct URL access)
+            if (!data) { 
+                fetchListingDetails();
+            }
         }
-    }, [id]); 
+    }, [id, data]); 
 
     function ContactClick() {
         window.location.href = `mailto:${listing.email}?subject=Interested in ${listing.title}`;
         setEmailShown(true);
     };
 
-    async function deleteListing(id){
+    async function deleteListing(listingId){
         console.log('Deleting listing from server...');
         try {
-            const response = await fetch(`/api/deletelisting/${id}`, {
+            const response = await fetch(`/api/deletelisting/${listingId}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
                 throw new Error(`HTTP error. status: ${response.status}`);
             }
-            if (response.status === 204) {
-                console.log('Success: Listing deleted (no content returned).');
-                return;
-            }
-            const res = await response.json();
-            console.log('Success:', res);
+            
+            // If deletion is successful, redirect to gallery
+            navigate('/Gallery'); 
+
         } catch (error) {
             console.error('Error deleting listing:', error);
+            alert('Failed to delete listing.');
         }
     }
 
     function handleDeleteClick(){
         if(window.confirm("Are you sure you want to delete this listing?")) {
-            console.log(`Deleting listing ${id}...`);
-            //LOGIC TO ACTUALLY DELETE LISTING FETCH
             deleteListing(id);
         }
     }
@@ -75,10 +69,15 @@ export default function ListingDetailPage({userEmail}) {
         return (
             <>
                 <Header userEmail={userEmail}/>
-                <div> Loading Listing... </div>;
+                <div style={{ padding: '20px' }}> Loading Listing... </div>
             </>
         );
     }
+    
+    // --- CONSTRUCT THE IMAGE URL ---
+    // The 'listing.photo' field holds the filename (e.g., 'photo-12345.jpg')
+    // We prefix it with the static URL defined in your Express server ('/images')
+    const imageUrl = `http://localhost:8080/images/${listing.photo}`;
 
     const isOwner = userEmail === listing.email;
 
@@ -119,9 +118,8 @@ export default function ListingDetailPage({userEmail}) {
                     <div className={styles.content}>
 
                         <div className={styles.image}>
-                        <img src={listing.photo} alt = {listing.title} className={styles.listingImage} />
+                        <img src={imageUrl} alt={listing.title} className={styles.listingImage} />
                         </div>
-
 
                         <div className={styles.rightSide}>
                             <h1 className={styles.title}> {listing.title} </h1>

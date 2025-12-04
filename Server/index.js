@@ -1,9 +1,29 @@
 const express = require('express');
+const fs = require('fs'); 
 //Postgres connection
-const pool = require('./db/connection');
+const pool = require('./db/connection.js');
+const multer = require('multer');
+const path = require('path');
+const cors = require('cors');
 
 const app = express();
 const port = 8080;
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'imgs/'); 
+  },
+  filename: (req, file, cb) => {
+    // Creating a unique name to prevent collisions: fieldname + timestamp + extension
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+  }
+});
+app.use('/images', express.static(path.join(__dirname, 'imgs')));
+app.use(cors());
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true }));
+const upload = multer({ storage: storage });
 
 // FOR TESTING PURPOSES ONLY
 // REMOVE LATER
@@ -59,14 +79,6 @@ const mockListingsData = [
         email: 'gymrat234@scu.edu'
     }
 ];
-
-// Establish connection with database pool 
-// Middleware for parsing JSON
-app.use(express.json());
-
-const routes = require('./routes');
-// using the routes
-app.use('/api', routes); 
 
 // POST - Create new user
 /*
@@ -216,14 +228,14 @@ app.post('/login', async (req, res) => {
         photo: insert url(s)
         location: Swig
 */
+app.post('/api/createlisting', upload.single('photo'), async (req, res) => {
+    const { title, price, description, location, email } = req.body;
+    const imagePath = req.file ? req.file.filename : null;
 
-app.post('/createlisting', async (req, res) => {
-    const { title, price, description, photo, location, email } = req.body;
-    
-    if(!title || !price || !description || !photo || !location || !email){
-        console.log('[API] Title, price, description, photo, location, or email is missing');
+    if(!title || !price || !description || !location || !email || !imagePath){
+        console.log('[API] One or more required fields is missing');
         return res.status(400).json({
-            error: 'Title, price, description, photo, location, or email is missing'
+            error: 'Title, price, description, location, or image is missing'
         });
     }
 
@@ -233,19 +245,16 @@ app.post('/createlisting', async (req, res) => {
             VALUES ($1, $2, $3, $4, $5, $6) 
             RETURNING *;
         `;
-        const values = [title, price, description, photo, location, email];
-
-        //executing the query to insert a new listing
-        const newListing = (await pool.query(query, values)).rows[0];
-
-        //returning the newly created listing
+        const values = [title, price, description, imagePath, location, email];
+        await pool.query(query, values);
         res.status(201).json({ 
-            message: 'The listing is created successfully', 
-            listing: newListing 
+            message: 'The listing is created successfully'
         });
     } catch (err) {
         console.error(err);
-         // for any other error, we return the 500 Internal Server Error
+        if (imagePath) {
+            fs.unlinkSync(imagePath); 
+        }
         return res.status(500).json({ 
             error: 'There is a database error creating the listing' 
         });

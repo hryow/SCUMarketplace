@@ -12,9 +12,11 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^5.1.0",
-    "pg": "^8.16.3",
-    "dotenv": "^16.4.5"
+    "multer": "^2.0.2",
+    "pg": "^8.16.3"
   },
   "devDependencies": {
     "jest": "^30.2.0",

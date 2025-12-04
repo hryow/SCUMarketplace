@@ -2,7 +2,6 @@ import React, { useState, useEffect} from 'react';
 import styles from './CreateListingPage.module.css';
 import {Link, useParams, useNavigate} from 'react-router-dom';
 import { motion } from 'framer-motion';
-// Have not added your email to the createlistingpage
 
 import Header from './Header.jsx'
 
@@ -17,73 +16,57 @@ const [imagePreview, setImagePreview] = useState(null);
 
 const[isSubmitted, setSubmitted] = useState(false);
 
+const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        setImage(file);
+        setImagePreview(URL.createObjectURL(file)); // For preview
+    }
+};
+
 async function submitListing(event){
     event.preventDefault();
-    // Validate image upload
     if (!imageFile) {
         alert('Please upload an image for your listing');
         return;
     }
 
     console.log(`Adding listing to server`);
-
-    console.log(listingName, price, description, location,imageFile);    
-
-    const listingData = {
-        title: listingName,
-        price: price,
-        description: description,
-        photo: imageFile,
-        location: location,
-        email: 'peepeepoopoo@scu.edu' // dummy email for testing
-    };
+    const formData = new FormData();
     
+    formData.append('title', listingName);
+    formData.append('price', price);
+    formData.append('description', description);
+    formData.append('photo', imageFile); 
+    formData.append('location', location);
+    formData.append('email', userEmail);
+
     try {
         const response = await fetch('/api/createlisting', { 
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' 
-            },
-            body: JSON.stringify(listingData) 
+            body: formData 
         });
+        
         if (!response.ok) {
             throw new Error(`HTTP error. status: ${response.status}`);
         }
+        
         const res = await response.json();
         console.log('Success:', res);
-        navigate('/Gallery'); // Redirect to Gallery page 
-
+        navigate('/Gallery');
+        
     } catch (error) {
         console.error('Error submitting listing:', error);
     }
 
-    //clear form after submission
+    // Clear after submitting
     setListingName('');
     setPrice('');
     setLocation('');
     setDescription('');
     setImage(null);
     setImagePreview(null);
-
     setSubmitted(true);
-
-    // setTimeout(() => setSubmitted(false), 3000);
-}
-
-function handleImageUpload(event) {
-    const file = event.target.files[0];
-    if (file){
-        setImage(file);
-        setImagePreview(URL.createObjectURL(file));
-
-        // Convert to Base64
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            // reader.result contains the Base64 string
-            setImage(reader.result); // Store Base64 instead of file object
-        };
-        reader.readAsDataURL(file);
-    }
 }
 
 let imageContent;

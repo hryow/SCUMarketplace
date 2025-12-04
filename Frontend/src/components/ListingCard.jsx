@@ -4,6 +4,7 @@ import styles from './ListingCard.module.css';
 
 export default function ListingCard({ listingData }) { 
     const { id, photo, title, price } = listingData;
+    const imageSource = `http://localhost:8080/images/${photo}`; 
     const navigate = useNavigate();
 
     const handleCardClick = () => {
@@ -12,7 +13,7 @@ export default function ListingCard({ listingData }) {
 
     return (
         <div className={styles.cardContainer} onClick={handleCardClick}>
-            <img src={photo || '/default-image.jpg'} alt={title}></img> 
+            <img src={imageSource} alt={title}></img> 
             <div className={styles.infoContainer}>
                 <div className={styles.title}>{title}</div>
                 <div className={styles.priceDetails}>
