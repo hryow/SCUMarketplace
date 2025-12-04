@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import { Route,Routes } from 'react-router-dom';
+import { Route,Routes, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import LoginPage from './components/LoginPage.jsx';
 import GalleryPage from './components/GalleryPage.jsx';
@@ -16,11 +16,13 @@ function App() {
     <div> 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
+
+
           {/* Three below divs are place holders for actual pages */}
           <Route path='/' element = {<LoginPage setUserEmail={setUserEmail}/>} />
-          <Route path='/Gallery' element = {<GalleryPage userEmail={userEmail} />} />
-          <Route path='/listing' element = {<CreateListingPage userEmail={userEmail} />} />
-          <Route path='/listing/:id' element={<ListingDetailPage userEmail={userEmail} />} />
+          <Route path='/Gallery' element = {userEmail ? <GalleryPage userEmail={userEmail} /> : <Navigate to="/" />} />
+          <Route path='/listing' element =  {userEmail ? <CreateListingPage userEmail={userEmail} /> : <Navigate to="/" />} />
+          <Route path='/listing/:id' element= {userEmail ? <ListingDetailPage userEmail={userEmail} /> : <Navigate to="/" />} />
         </Routes>
       </AnimatePresence>
     </div>
