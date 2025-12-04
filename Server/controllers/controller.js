@@ -10,7 +10,7 @@ exports.createUser = async (req, res) => {
   if (!email || !password) {
     // Return a 400 Bad Request if any of the fields are missing
     return res.status(400).json({ 
-      error: 'Email, password, name, profile picture, or biography is missing and not there' 
+      error: 'Email or password is missing and not there' 
     });
   }
 
