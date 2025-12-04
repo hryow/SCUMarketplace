@@ -100,6 +100,16 @@ app.post('/api/createuser', async (req, res) =>{
     } catch (err) {
         //logging errors to the server console to debug anything
         console.error(err);
+        //checking for any unique constraint violation (i.e. if an email already exists)
+        if (err.code === '23505') { // the PostgreSQL error code for unique violation
+            res.status(400).json({ error: 'The user already exists' });
+        } else {
+            // for any other error, we return the 500 Internal Server Error
+            res.status(500).json({ error: 'There is a database error creating the user' });
+        }
+    }
+});
+            
     // find if user email already exists
     // if so, stop account creation
     const validUser = mockUsersData.find(data => data.email === email);
