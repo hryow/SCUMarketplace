@@ -73,7 +73,7 @@ app.use('/api', routes);
         email: jdoe67@scu.edu
         password: 676767
 */
-app.post('/api/createuser', async (req, res) =>{
+app.post('/createuser', async (req, res) =>{
     const { email,  password} = req.body;
     // check if any required fields are missing
     if(!email || !password){
@@ -141,7 +141,7 @@ app.post('/api/createuser', async (req, res) =>{
 */
 
 // POST - Check if user credentials are valid
-app.post('/api/login', async (req, res) => {
+app.post('/login', async (req, res) => {
     const {email, password} = req.body;
     
     //validating the required fields
@@ -216,7 +216,7 @@ app.post('/api/login', async (req, res) => {
         location: Swig
 */
 
-app.post('/api/createlisting', async (req, res) => {
+app.post('/createlisting', async (req, res) => {
     const { title, price, description, photo, location, email } = req.body;
     
     if(!title || !price || !description || !photo || !location || !email){
@@ -287,7 +287,7 @@ app.post('/api/createlisting', async (req, res) => {
 */
 
 //Returns ALL listings
-app.get('/api/getlistings', async (req, res) => {
+app.get('/getlistings', async (req, res) => {
     try {
         const query = 'SELECT * FROM listings ORDER BY id DESC';
         const listings = await pool.query(query);
@@ -301,7 +301,7 @@ app.get('/api/getlistings', async (req, res) => {
 });
 
 // GET/FETCH - Retrieve singular listing data
-app.get('/api/getlistings/:id', async (req, res) => {
+app.get('/getlistings/:id', async (req, res) => {
 // Need to get listing ID from the URL parameter
 const id = parseInt(req.params.id);
     try {
@@ -350,7 +350,7 @@ const id = parseInt(req.params.id);
 // DELETE - Delete specific listing
 // Implement if needed. Otherwise disregard.
 // Since professor is wondering what happens when a listing is sold
-app.delete('/api/deletelisting/:id', async (req, res) => {
+app.delete('/deletelisting/:id', async (req, res) => {
     // Getting the listing ID from the URL parameter
     const id = parseInt(req.params.id);
     try {
