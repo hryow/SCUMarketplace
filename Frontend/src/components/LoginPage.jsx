@@ -73,12 +73,11 @@ export default function LoginPage({ setUserEmail }) {
         setErrorMsg(''); 
         try{
             let success = false;
-            if (loginMode) {
+            if (loginMode) { // Log In Mode
                 success = await login();
                 if (success) {
                     console.log('Login successful!');
                     setUserEmail(email);
-                    navigate('/Gallery'); // Navigate on successful login
                 } else {
                     console.log('Login failed. Check the error message.');
                 }
@@ -108,59 +107,59 @@ export default function LoginPage({ setUserEmail }) {
             transition={{ duration: 0.3 }}
             style={{ width: '100%', height: '100%' }}
         >
-        <div className={`${styles.card} ${!loginMode ? styles.signup : ''}`}>
+            <div className={`${styles.card} ${!loginMode ? styles.signup : ''}`}>
 
-            <div className={styles.content}>
-                <div className={styles.title}>
-                    {loginMode ? 'Log In' : 'Sign Up'}
-                </div>
-
-                {/* Display error message */}
-                {errorMsg && (
-                    <div className={styles.error} style={{ color: 'red', marginBottom: '10px' }}>
-                        {errorMsg}
-                    </div>
-                )}
-
-                <form className={styles.form} onSubmit={handleSubmit}>
-                    <input
-                        className={styles.field}
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="email@scu.edu"
-                        required
-                    >
-                    </input>
-                    
-                    <input
-                        className={styles.field}
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="password"
-                        required={!loginMode}
-                    >
-                    </input>
-
-                    <div className={styles.newUser}>
-                        {loginMode ? "First time using? " : "Already have an account? "}
-                        
-                        <span className={styles.link} onClick={switchAuthMode}>
-                            {loginMode ? "Sign up for free" : "Log in here"}
-                        </span>
-                    </div>
-
-                    <button type="submit">
+                <div className={styles.content}>
+                    <div className={styles.title}>
                         {loginMode ? 'Log In' : 'Sign Up'}
-                    </button>
-                </form>
+                    </div>
+
+                    {/* Display error message */}
+                    {errorMsg && (
+                        <div className={styles.error} style={{ color: 'red', marginBottom: '10px' }}>
+                            {errorMsg}
+                        </div>
+                    )}
+
+                    <form className={styles.form} onSubmit={handleSubmit}>
+                        <input
+                            className={styles.field}
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="email@scu.edu"
+                            required
+                        >
+                        </input>
+                        
+                        <input
+                            className={styles.field}
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="password"
+                            required={!loginMode}
+                        >
+                        </input>
+
+                        <div className={styles.newUser}>
+                            {loginMode ? "First time using? " : "Already have an account? "}
+                            
+                            <span className={styles.link} onClick={switchAuthMode}>
+                                {loginMode ? "Sign up for free" : "Log in here"}
+                            </span>
+                        </div>
+
+                        <button type="submit">
+                            {loginMode ? 'Log In' : 'Sign Up'}
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
         </motion.div>
     );
 }

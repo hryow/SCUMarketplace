@@ -4,25 +4,32 @@ import { Route,Routes, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import LoginPage from './components/LoginPage.jsx';
 import GalleryPage from './components/GalleryPage.jsx';
-import ListingCard from './components/ListingCard.jsx';
 import ListingDetailPage from './components/ListingDetailPage.jsx';
 import CreateListingPage from './components/CreateListingPage.jsx';
 
 function App() {
-
   const [userEmail, setUserEmail] = useState("");
 
   return (
     <div> 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-
-
-          {/* Three below divs are place holders for actual pages */}
-          <Route path='/' element = {<LoginPage setUserEmail={setUserEmail}/>} />
-          <Route path='/Gallery' element = {userEmail ? <GalleryPage userEmail={userEmail} /> : <Navigate to="/" />} />
-          <Route path='/listing' element =  {userEmail ? <CreateListingPage userEmail={userEmail} /> : <Navigate to="/" />} />
-          <Route path='/listing/:id' element= {userEmail ? <ListingDetailPage userEmail={userEmail} /> : <Navigate to="/" />} />
+          <Route 
+            path='/' 
+            element={userEmail ? <Navigate to="/Gallery" /> : <LoginPage setUserEmail={setUserEmail}/>}
+          />
+          <Route 
+            path='/Gallery' 
+            element={userEmail ? <GalleryPage userEmail={userEmail} /> : <Navigate to="/" />} 
+          />
+          <Route 
+            path='/listing' 
+            element={userEmail ? <CreateListingPage userEmail={userEmail} /> : <Navigate to="/" />} 
+          />
+          <Route 
+            path='/listing/:id' 
+            element={userEmail ? <ListingDetailPage userEmail={userEmail} /> : <Navigate to="/" />} 
+          />
         </Routes>
       </AnimatePresence>
     </div>
