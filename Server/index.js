@@ -74,7 +74,6 @@ app.post('/api/createuser', async (req, res) =>{
     const { email,  password} = req.body;
     // check if any required fields are missing
     if(!email || !password){
-        console.log('[API] email or password is missing');
         // return 400 bad request if any of the fields are missing
         return res.status(400).json({
             error: 'Email or password is missing'
@@ -87,7 +86,8 @@ app.post('/api/createuser', async (req, res) =>{
         $1 will replace the first value in the argument, and etc. */
         const query = `
             INSERT INTO users (email, password)
-            VALUES ($1, $2) RETURNING *;
+            VALUES ($1, $2) 
+            RETURNING *;
         `;
 
         // the array of values in order to substitute into the placeholders in the query
@@ -96,7 +96,10 @@ app.post('/api/createuser', async (req, res) =>{
         const newUser = (await pool.query(query, values)).rows[0];
 
         // Respond with 201 Created and return the newly created user
-        res.status(201).json({ message: 'The user is created successfully', user: newUser });
+        res.status(201).json({ 
+            message: 'The user is created successfully', 
+            user: newUser 
+        });
 
     } catch (err) {
         //logging errors to the server console to debug anything
@@ -104,13 +107,13 @@ app.post('/api/createuser', async (req, res) =>{
         //checking for any unique constraint violation (i.e. if an email already exists)
         if (err.code === '23505') { // the PostgreSQL error code for unique violation
             res.status(400).json({ error: 'The user already exists' });
-        } else {
-            // for any other error, we return the 500 Internal Server Error
-            res.status(500).json({ error: 'There is a database error creating the user' });
-        }
+        } 
+        // for any other error, we return the 500 Internal Server Error
+        res.status(500).json({ error: 'There is a database error creating the user' });
     }
 });
-            
+
+/*        
     // find if user email already exists
     // if so, stop account creation
     const validUser = mockUsersData.find(data => data.email === email);
@@ -132,6 +135,7 @@ app.post('/api/createuser', async (req, res) =>{
         message: 'User created successfully',
     });
 });
+*/
 
 // POST - Check if user credentials are valid
 app.post('/api/login', async (req, res) => {
