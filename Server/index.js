@@ -148,9 +148,14 @@ app.post('/api/login', async (req, res) => {
         const query = 'SELECT * FROM users WHERE email = $1'; 
         const result = await pool.query(query, [email]);
 
-        if (result.rows.length === 0) return res.status(401).json({ error: 'User not found' });
-
+        if (result.rows.length === 0) return res.status(401).json({ error: 'User is not found!' });
         const user = result.rows[0];
+
+        //we compare the password from the request with the stored password
+        if (user.password !== password) return res.status(401).json({ error: 'This is the incorrect password' });
+        //the login is successful
+        res.status(200).json({ message: 'The login is successful', user });
+
          
     // FOR TESTING 
     // Since emails are unique, we're able to search for the singular valid user using only email and password
