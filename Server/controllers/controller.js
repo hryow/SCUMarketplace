@@ -18,22 +18,25 @@ exports.createUser = async (req, res) => {
     const values = [email, password, name, pfp, bio];
 
     // Executing the query and getting the inserted user
-    const validUser = (await pool.query(query, values)).rows[0];
+    const newUser = (await pool.query(query, values)).rows[0];
 
     // Logging the success to server console
-    console.log(`[API] Successfully created new user: ${validUser.name}`);
+    console.log(`[API] Successfully created new user: ${newUser.name}`);
 
     // Sending the success response with the user data
     res.status(201).json({
       message: 'The user is created successfully',
-      email: validUser.email,
-      name: validUser.name,
-      pfp: validUser.pfp,
-      bio: validUser.bio
+      email: newUser.email
     });
   } catch (err) {
-    // Loggoing the error and returning a 500 Internal Server Error if database query fails
+    // Logging the error and returning a 500 Internal Server Error if database query fails
     console.error(err);
+    
+    //constraint 
+    if (err.code === '23505') { 
+      return res.status(400).json({ error: 'The user already exists' });
+    }
+    
     res.status(500).json({ error: 'Database error creating user' });
   }
 };
