@@ -14,6 +14,11 @@ exports.createUser = async (req, res) => {
     });
   }
 
+  // SCU email validation
+  if (!email.endsWith("@scu.edu")) {
+    return res.status(400).json({ error: 'Only SCU emails allowed' });
+  }
+
   try {
     // a SQL query to insert a new user into the 'users' table
     const query = `
@@ -57,6 +62,11 @@ exports.login = async (req, res) => {
   // Validating the presence of email and password
   if (!email || !password) return res.status(400).json({ error: 'The email or password is missing.' });
 
+  // SCU email validation
+  if (!email.endsWith("@scu.edu")) {
+    return res.status(400).json({ error: 'Only SCU emails allowed' });
+  }
+  
   try {
     // A query to find user by email
     const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
