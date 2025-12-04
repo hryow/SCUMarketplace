@@ -290,8 +290,8 @@ const id = req.params.id;
     try {
         
         // Fetching all of the new listings sorted by newest
-        const query = 'SELECT * FROM listings ORDER BY created_at DESC'; 
-        const listings = (await pool.query(query)).rows;
+        const query = `SELECT * FROM listings WHERE id = $1`;
+        const listings = await pool.query(query, [id]);
 
         if (listings.rows.length === 0) {
             return res.status(404).json({ 
@@ -300,7 +300,7 @@ const id = req.params.id;
         }
         
         // Return the listing if it is found
-        res.status(200).json(listings);
+        res.status(200).json(listings.rows[0]);
         
     } catch (err) {
         console.error(err);
