@@ -69,7 +69,7 @@ app.use(express.json());
         email: jdoe67@scu.edu
         password: 676767
 */
-app.post('/api/createuser', (req, res) =>{
+app.post('/api/createuser', async (req, res) =>{
     const { email,  password} = req.body;
     if(!email || !password){
         console.log('[API] email or password is missing');
