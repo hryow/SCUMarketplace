@@ -64,6 +64,7 @@ const mockListingsData = [
 // Middleware for parsing JSON
 app.use(express.json());
 
+const routes = require('./routes');
 // using the routes
 app.use('/api', routes); 
 
