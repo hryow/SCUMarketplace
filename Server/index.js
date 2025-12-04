@@ -71,12 +71,23 @@ app.use(express.json());
 */
 app.post('/api/createuser', async (req, res) =>{
     const { email,  password} = req.body;
+    // check if any required fields are missing
     if(!email || !password){
         console.log('[API] email or password is missing');
+        // return 400 bad request if any of the fields are missing
         return res.status(400).json({
             error: 'Email or password is missing'
         });
     }
+
+    try {
+        // a SQL query for inserting a new user into the 'users' table
+        // $1 and $2 are placeholders for the parameterized queries to prevent injection (SQL injection)
+        //$1 will replace the first value in the argument, and etc.
+        const query = `
+            INSERT INTO users (email, password)
+            VALUES ($1, $2) RETURNING *;
+        `;
     // find if user email already exists
     // if so, stop account creation
     const validUser = mockUsersData.find(data => data.email === email);
