@@ -6,8 +6,9 @@ import { useLocation } from 'react-router-dom';
 
 import Header from './Header.jsx';
 import Popup from './Popup';
+import logoutButton from '../assets/logout-button.png';
 
-export default function GalleryPage({ userEmail }) {
+export default function GalleryPage({ userEmail, setUserEmail }) {
     const [listings, setListings] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState("");
@@ -66,6 +67,13 @@ export default function GalleryPage({ userEmail }) {
         setShowPopup(true);
     };
 
+    const handleLogout = () => {
+        const confirmLogout = window.confirm("Are you sure you want to log out?");
+        if (confirmLogout) {
+            setUserEmail(""); // Clears the state in App.js, forcing a redirect to Login
+        }
+    };
+
     return (
         <>
             <Header userEmail={userEmail}/>
@@ -89,6 +97,9 @@ export default function GalleryPage({ userEmail }) {
                     ))}
                 </div>
             </motion.div>
+            <button className={styles.logout} onClick={handleLogout}>
+                <img src={logoutButton} alt="log out" className={styles.logoutImg}/>
+            </button>
         </>
     );
 }

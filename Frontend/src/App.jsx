@@ -21,7 +21,7 @@ function App() {
           />
           <Route 
             path='/Gallery' 
-            element={userEmail ? <GalleryPage userEmail={userEmail} /> : <Navigate to="/" />} 
+            element={userEmail ? <GalleryPage userEmail={userEmail} setUserEmail={setUserEmail} /> : <Navigate to="/" />} 
           />
           <Route 
             path='/listing' 
