@@ -77,10 +77,10 @@ if (imagePreview) {
 } 
 else{
     imageContent = (
-        <>
+        <div className={styles.addImageText}>
             <div className = {styles.plusSign}> + </div>
-            <div> Add Image </div>
-        </>
+            <div> Add Image</div>
+        </div>
     );
 }
 

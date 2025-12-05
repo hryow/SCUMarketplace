@@ -10,6 +10,11 @@
     transform: scale(1.067);
 }
 
+.cardContainer:active {
+    background-color: #e0e0e0; /* Or any darker gray like #d6d6d6 */
+    filter: brightness(0.8);
+}
+
 img {
     width: 20rem;
     aspect-ratio: 1.2 / 1;
@@ -26,6 +31,11 @@ img {
     text-align: left;
     font-weight: 600;
     color: #A32035;
+
+    white-space: nowrap;     
+    overflow: hidden;         
+    text-overflow: ellipsis; 
+    max-width: 19rem;
 }
 
 .priceDetails {

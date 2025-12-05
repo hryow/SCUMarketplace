@@ -1,5 +1,7 @@
 // Importing the PostgreSQL connection from db folder to run the queries
 const pool = require('../db/connection');
+const fs = require('fs'); 
+const path = require('path');
 
 // Creating a new user
 exports.createUser = async (req, res) => {
@@ -181,23 +183,40 @@ exports.getSingleListing = async (req, res) => {
   }
 };
 
+const getImagePath = (filename) => {
+    return path.join(__dirname, '..', 'imgs', filename); 
+};
+
 // Delete listing
 exports.deleteListing = async (req, res) => {
-  // Get the id from the URL parameters
   const { id } = req.params; 
-
   try {
-    // Query to delete the listing with a matching id
-    const result = await pool.query('DELETE FROM listings WHERE id = $1 RETURNING *', [id]);
-    
-    if (result.rowCount === 0) {
+    // Retrieve listing
+    const selectQuery = 'SELECT photo FROM listings WHERE id = $1';
+    const selectResult = await pool.query(selectQuery, [id]);
+    if (selectResult.rowCount === 0) {
         return res.status(404).json({ error: 'Listing not found or already deleted' });
     }
-    console.log(`[API] Deleted listing ID: ${id}.`);
-    res.status(200).json({ message: 'Listing successfully deleted', deletedListing: result.rows[0] });
+    const filename = selectResult.rows[0].photo;
+    // Delete from db
+    const deleteQuery = 'DELETE FROM listings WHERE id = $1';
+    await pool.query(deleteQuery, [id]); 
 
-  } catch (err) {
-    console.error(err);
+    // Remove file from local storage on server
+    if (filename) {
+        const fullPath = getImagePath(filename);
+        try {
+            fs.unlinkSync(fullPath);
+            console.log(`[File System] Successfully deleted file: ${filename}`);
+        } catch (fileError) {
+            console.error(`[File System Error] Could not delete file ${filename}:`, fileError.message);
+        }
+    }
+    console.log(`[API] Successfully deleted listing ID: ${id}.`);
+    res.status(200).json({ message: 'Listing successfully deleted', deletedListingId: id });
+
+  } catch (dbError) {
+    console.error(dbError);
     res.status(500).json({ error: 'Database error during deletion' });
   }
 };
