@@ -52,7 +52,7 @@ export default function ListingDetailPage({userEmail}) {
             }
             
             // If deletion is successful, redirect to gallery
-            navigate('/Gallery'); 
+            navigate('/Gallery', { state: { listingDeleted: true } });
 
         } catch (error) {
             console.error('Error deleting listing:', error);

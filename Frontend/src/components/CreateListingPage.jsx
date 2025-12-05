@@ -129,7 +129,9 @@ return (
 
                     <label><b>Description *</b>
                         <textarea className={styles.textArea} value={description}
-                        onChange={(e)=>setDescription(e.target.value)} required />
+                        onChange={(e)=>setDescription(e.target.value)} 
+                        placeholder='Condition, reason for selling, pickup logistics, etc.'
+                        required />
                     </label>
 
                     <button type="submit" className={styles.submitButton}> 

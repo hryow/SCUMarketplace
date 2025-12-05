@@ -10,16 +10,27 @@ import Popup from './Popup';
 export default function GalleryPage({ userEmail }) {
     const [listings, setListings] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState("");
 
     const location = useLocation();
     const hasShownPopup = useRef(false);
 
-    // check if listing was created
+    // check if listing was created/deleted
     useEffect(() => {
-        if (!hasShownPopup.current && location.state?.listingCreated) {
-            setShowPopup(true);
-            hasShownPopup.current = true;
-            window.history.replaceState({}, document.title);
+        if (!hasShownPopup.current) {
+            // listing created
+            if (location.state?.listingCreated) {
+                setPopupMessage("Your listing was created!");
+                setShowPopup(true);
+                hasShownPopup.current = true;
+                window.history.replaceState({}, document.title);
+            }
+            else if (location.state?.listingDeleted) {
+                setPopupMessage("Your listing was deleted.");
+                setShowPopup(true);
+                hasShownPopup.current = true;
+                window.history.replaceState({}, document.title);
+            }
         }
     }, [location]);
 
@@ -52,7 +63,7 @@ export default function GalleryPage({ userEmail }) {
         <>
             <Header userEmail={userEmail}/>
             <AnimatePresence>
-                {showPopup && <Popup message="Your listing was created!" onClose={() => setShowPopup(false)} />}
+                {showPopup && <Popup message={popupMessage} onClose={() => setShowPopup(false)} />}
             </AnimatePresence>
             <motion.div
                 initial={{ opacity: 0, x: 100 }}
