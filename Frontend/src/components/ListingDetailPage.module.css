@@ -105,8 +105,7 @@
 
 
 .email {
-  text-align: right;
-  font-size: 0.9rem;
-  color: #777;
-  margin-top: auto;
+  font-size: 1.2rem;
+  color: black;
+  margin-bottom: 1rem;
 }
