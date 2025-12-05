@@ -53,7 +53,7 @@ async function submitListing(event){
         
         const res = await response.json();
         console.log('Success:', res);
-        navigate('/Gallery');
+        navigate('/Gallery', { state: { listingCreated: true } });
         
     } catch (error) {
         console.error('Error submitting listing:', error);
@@ -96,7 +96,7 @@ return (
         >
             <div className={styles.pageContainer}> 
             <Link to="/Gallery" className={styles.backButton}>
-            &lt; Back
+                &lt; Back
             </Link>                
                 
 
@@ -105,7 +105,7 @@ return (
                         <input type="file" accept='image/*' className={styles.fileinput}
                         onChange={handleImageUpload}/>
                 
-                    {imageContent}
+                        {imageContent}
                     </label> 
                     <div className={styles.formInfo}>
                     <label> <b>Seller:</b>

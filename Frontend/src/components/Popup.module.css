@@ -1,0 +1,17 @@
+.container {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    background-color: #A32035;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    z-index: 9999; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.text {
+    font-size: 1.1rem;
+    font-weight: 600;
+}

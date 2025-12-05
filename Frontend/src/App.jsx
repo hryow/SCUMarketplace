@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import { Route,Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import LoginPage from './components/LoginPage.jsx';
 import GalleryPage from './components/GalleryPage.jsx';
@@ -9,6 +9,7 @@ import CreateListingPage from './components/CreateListingPage.jsx';
 
 function App() {
   const [userEmail, setUserEmail] = useState("");
+  const location = useLocation();
 
   return (
     <div> 

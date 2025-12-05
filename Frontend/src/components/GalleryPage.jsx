@@ -1,12 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './GalleryPage.module.css';
 import ListingCard from './ListingCard.jsx';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 import Header from './Header.jsx';
+import Popup from './Popup';
 
 export default function GalleryPage({ userEmail }) {
     const [listings, setListings] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+
+    const location = useLocation();
+    const hasShownPopup = useRef(false);
+
+    // check if listing was created
+    useEffect(() => {
+        if (!hasShownPopup.current && location.state?.listingCreated) {
+            setShowPopup(true);
+            hasShownPopup.current = true;
+            window.history.replaceState({}, document.title);
+        }
+    }, [location]);
+
+    // make popup go away after 4 seconds
+    useEffect(() => {
+        if (showPopup) {
+            const timer = setTimeout(() => {
+                setShowPopup(false);
+            }, 4000);
+            return () => clearTimeout(timer);
+        }
+    }, [showPopup]);
     
     useEffect(() => {
         const fetchListings = async() => {
@@ -26,6 +51,9 @@ export default function GalleryPage({ userEmail }) {
     return (
         <>
             <Header userEmail={userEmail}/>
+            <AnimatePresence>
+                {showPopup && <Popup message="Your listing was created!" onClose={() => setShowPopup(false)} />}
+            </AnimatePresence>
             <motion.div
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
