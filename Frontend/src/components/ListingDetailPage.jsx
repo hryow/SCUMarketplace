@@ -88,11 +88,11 @@ export default function ListingDetailPage({userEmail}) {
         );
     } else {
         if (isEmailShown) {
-            contactSection = <p className={styles.email}> An email has been drafted for you! Please contact the seller at: <b>{listing.email}</b> </p>;
+            contactSection = <p className={styles.email}> An email has been drafted for you, please contact the seller for further information on payment. </p>;
         } else {
             contactSection = (
                 <button onClick={ContactClick} className={styles.buyButton}>
-                    Contact Seller
+                    contact seller
                 </button>
             );
         }
@@ -110,7 +110,7 @@ export default function ListingDetailPage({userEmail}) {
             >
                 <div className={styles.pageContainer}>
                     <Link to="/Gallery" className = {styles.backButton}>
-                    &lt; Back
+                    &lt; back
                     </Link>
                     
                     <div className={styles.content}>

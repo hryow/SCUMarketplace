@@ -79,7 +79,7 @@ else{
     imageContent = (
         <div className={styles.addImageText}>
             <div className = {styles.plusSign}> + </div>
-            <div> Add Image</div>
+            <div> add image</div>
         </div>
     );
 }
@@ -96,7 +96,7 @@ return (
         >
             <div className={styles.pageContainer}> 
             <Link to="/Gallery" className={styles.backButton}>
-                &lt; Back
+                &lt; back
             </Link>                
                 
 
@@ -108,10 +108,10 @@ return (
                         {imageContent}
                     </label> 
                     <div className={styles.formInfo}>
-                    <label> <b>Seller:</b>
+                    <label> <b>seller:</b>
                         <div>{userEmail}</div>
                     </label>
-                    <label><b>Listing Name *</b>
+                    <label><b>listing name *</b>
                         <input type="text" className={styles.input} value={listingName} 
                         onChange={(e)=>setListingName(e.target.value)} required />
                     </label>
@@ -121,21 +121,21 @@ return (
                         <input type="number" className={styles.input} value={price} 
                         onChange={(e)=>setPrice(e.target.value)} required />
                     </label>
-                    <label className={styles.location}> <b>Location *</b>
+                    <label className={styles.location}> <b>location *</b>
                         <input type="text" className={styles.input} value={location} 
                         onChange={(e)=>setLocation(e.target.value)} required />
                     </label>
                         </div> 
 
-                    <label><b>Description *</b>
+                    <label><b>description *</b>
                         <textarea className={styles.textArea} value={description}
                         onChange={(e)=>setDescription(e.target.value)} 
-                        placeholder='Condition, reason for selling, pickup logistics, etc.'
+                        placeholder='condition, reason for selling, pickup logistics, etc.'
                         required />
                     </label>
 
                     <button type="submit" className={styles.submitButton}> 
-                        Submit Listing
+                        submit listing
                     </button>
                     {/* {isSubmitted && (
                         <p style={{color: 'green', marginTop: '10px'}}>
