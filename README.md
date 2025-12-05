@@ -19,7 +19,7 @@ MVP Requirements:
 - Ability to see a gallery of things to buy, ordered by most recent of everything for sale (✅)
 - Ability to see core details like cost, title, and photos, and descriptions (✅)
 - Ability to add new listings (✅)
-  - Sellers should be able to specify details such as title, cost, description, tags/categories, and photos (❌)
+  - Sellers should be able to specify details such as title, cost, description, tags/categories, and photos (✅)
 - Ability to buy the product being listed (✅)
   - Asking to buy the product sends a message to the seller (✅)
   - The seller can mark an item as ‘sold’ which causes the listing to be taken down (✅)
