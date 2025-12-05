@@ -25,6 +25,7 @@ export default function GalleryPage({ userEmail }) {
                 hasShownPopup.current = true;
                 window.history.replaceState({}, document.title);
             }
+            // listing deleted
             else if (location.state?.listingDeleted) {
                 setPopupMessage("Your listing was deleted.");
                 setShowPopup(true);
@@ -59,6 +60,12 @@ export default function GalleryPage({ userEmail }) {
         fetchListings();
     }, []); // runs once on load
 
+    const handleListingRemove = (deletedId) => {
+        setListings((prevListings) => prevListings.filter(item => item.id !== deletedId));
+        setPopupMessage("Removed listing!");
+        setShowPopup(true);
+    };
+
     return (
         <>
             <Header userEmail={userEmail}/>
@@ -76,6 +83,8 @@ export default function GalleryPage({ userEmail }) {
                         <ListingCard 
                             key={listing.id}
                             listingData = {listing}
+                            userEmail={userEmail}
+                            onDelete={handleListingRemove}
                         />
                     ))}
                 </div>

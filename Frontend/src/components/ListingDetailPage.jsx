@@ -126,7 +126,7 @@ export default function ListingDetailPage({userEmail}) {
                                 <span className={styles.price}> ${listing.price} </span>
                                 <span className={styles.location}> {listing.location} </span>
                             </div>
-                            <p className= {styles.email}> Seller: {listing.email} </p>
+                            <p className= {styles.email}> seller: <em>{listing.email} </em></p>
                         
                             <p className={styles.lstingDesc}> {listing.description} </p>
 
