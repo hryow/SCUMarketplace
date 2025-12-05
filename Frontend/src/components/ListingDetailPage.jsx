@@ -88,7 +88,7 @@ export default function ListingDetailPage({userEmail}) {
         );
     } else {
         if (isEmailShown) {
-            contactSection = <p className={styles.email}> {listing.email} </p>;
+            contactSection = <p className={styles.email}> An email has been drafted for you! Please contact the seller at: <b>{listing.email}</b> </p>;
         } else {
             contactSection = (
                 <button onClick={ContactClick} className={styles.buyButton}>
@@ -126,6 +126,7 @@ export default function ListingDetailPage({userEmail}) {
                                 <span className={styles.price}> ${listing.price} </span>
                                 <span className={styles.location}> {listing.location} </span>
                             </div>
+                            <p className= {styles.email}> Seller: {listing.email} </p>
                         
                             <p className={styles.lstingDesc}> {listing.description} </p>
 
